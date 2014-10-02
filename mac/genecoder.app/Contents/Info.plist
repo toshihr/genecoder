@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+        <dict>
+                <key>CFBundleName</key>
+                <string>genecoder</string>
+                <key>CFBundleDisplayName</key>
+                <string>genecoder</string>
+                <key>CFBundleExecutable</key>
+                <string>genecoder-gui.sh</string>
+                <key>CFBundlePackageType</key>
+                <string>APPL</string>
+                <key>CFBundleSignature</key>
+                <string>????</string>
+                <key>CFBundleIconFile</key>
+                <string>find-search-zoom-icone-6310.</string>
+        </dict>
+</plist>

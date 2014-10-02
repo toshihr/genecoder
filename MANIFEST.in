@@ -1,0 +1,6 @@
+recursive-include genecoder *.pyx *.ini
+recursive-include tests *.py
+include requirements.txt
+include test-requirements.txt
+include README.rst
+include CHANGELOG.txt

@@ -303,7 +303,7 @@ def run(argv):
 
 
 # --- global initialization ---
-loadResource('genecoder/genecoder.ini')
+loadResource(os.path.join(os.path.dirname(__file__), 'genecoder.ini'))
 
 
 def main():

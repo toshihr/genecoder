@@ -39,7 +39,7 @@ Install
 ::
 
     $ pip install git+https://github.com/kerug/genecoder.git
-
+    $ pyside_postinstall.py -install
 
 Build
 -----

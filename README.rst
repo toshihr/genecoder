@@ -7,14 +7,39 @@ work in progress.
 Requirements
 ------------
 
+- python & pip
+- Qt4
+
+
+Install Requirements
+--------------------
+
 Qt4
+~~~
+
+Install Qt4 via Homebrew is recommended. Install Homebrew is as follows:
+
+::
+
+    $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Install Qt4 is as follows:
+
+::
+
+    $ brew install qt
+
+python & pip
+~~~~~~~~~~~~
+
 
 Install
 -------
 
 ::
 
-    $ brew install qt
+    $ pip install git+https://github.com/kerug/genecoder.git
+
 
 Build
 -----

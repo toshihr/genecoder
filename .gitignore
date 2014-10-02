@@ -6,7 +6,6 @@ build
 dist
 
 # generated c source and built extensions
-*.c
 *.so
 *.pyd
 

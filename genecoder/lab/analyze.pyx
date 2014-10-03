@@ -489,7 +489,7 @@ def analyze_survivalTest(out_file, values, events, times, seq_category, pre_data
                         else:
                             res_axis1 = stat.km(data[2, g1_mask], data[1, g1_mask],
                                                 tag_list=~wildtype_mask[g1_mask])
-                            res_axis2 = stat.km(data[2][:, g2_mask], data[1, g2_mask],
+                            res_axis2 = stat.km(data[2, g2_mask], data[1, g2_mask],
                                                 tag_list=~wildtype_mask[g2_mask])
                             legend = ['RC{0}{1} (n={2})'.format(
                                 a_axis[0], a_threshold, a_axis[1]) for a_axis in (('>=', n1),

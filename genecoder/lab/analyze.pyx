@@ -606,8 +606,8 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
         lifeData_omit = {}
         lifeData = []
         lifeData_dict = OrderedDict()
-        with open(database, 'r', newline='') as fin:
-            csv_reader = csv.reader(fin, delimiter=',', quotechar='"')
+        with open(database, 'rU') as fin:
+            csv_reader = csv.reader(fin, delimiter=b',', quotechar=b'"')
             for a_line in gen_table(csv_reader=csv_reader, columns=lifeData_columns,
                                     accept_filters=None, omit_filters=lifeData_omit):
                 lifeData.append(a_line)
@@ -657,9 +657,9 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                 outRC = os.path.join(
                     out_dir, a_region, a_coordinate_of_GF4, 'RC.csv')
                 os.mkdir(os.path.dirname(outRC))
-                with open(outRC, 'w', newline='') as out_file:
+                with open(outRC, 'w') as out_file:
                     csv_writer = csv.writer(
-                        out_file, delimiter=',', quotechar='"')
+                        out_file, delimiter=b',', quotechar=b'"')
                     csv_writer.writerow(csv_RC_header)
                     # STEP 3.2: LOOP w.r.t. coder
                     for (coder_id, coder_detail, n, k, a_coder) in map(
@@ -721,13 +721,13 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
         # ここで回収してしまうと, 区別がつかない行ができてしまうため
         # WILDTYPEを取り除いて行った検定の結果に関しては, 最初から取り除いたデータを用意してプログラムを実行すれば得られる
         outStatAll = os.path.join(out_dir, 'STAT_ALL.csv')
-        with open(outStatAll, 'w', newline='') as out_file:
+        with open(outStatAll, 'w') as out_file:
             header_all = ['region', 'gf4', 'coder', 'event'] + \
                          ['threshold', 'n1', 'n2', 'nwild', 'belong_group',
                           'median(t)1', 'median(t)2', 'W', 'var(W)', 'z-value',
                           'wilcox p-value', 'chi-squared', 'logrank p-value', 'group1',
                           'group2', 'group1 RC', 'group2 RC']
-            csv_writer = csv.writer(out_file, delimiter=',', quotechar='"')
+            csv_writer = csv.writer(out_file, delimiter=b',', quotechar=b'"')
             csv_writer.writerow(header_all)
             for path, dirs, files in os.walk(out_dir):
                 for a_file in files:
@@ -737,9 +737,9 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                     full_name = os.path.join(path, a_file)
                     name_nodes = full_name[
                         len(os.path.abspath(out_dir)) + len(os.path.sep):].split(os.path.sep)
-                    with open(full_name, 'r', newline='') as fin:
+                    with open(full_name, 'rU') as fin:
                         csv_reader = csv.reader(
-                            fin, delimiter=',', quotechar='"')
+                            fin, delimiter=b',', quotechar=b'"')
                         # ヘッダを空読み
                         next(csv_reader)
                         for a_line in csv_reader:

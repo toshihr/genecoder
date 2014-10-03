@@ -8,7 +8,7 @@ except ImportError:
 import argparse
 import sys
 import csv
-import configparser
+from ConfigParser import ConfigParser
 import os
 import itertools
 from genecoder.lab import analyze
@@ -34,7 +34,7 @@ def loadResource(file_name):
     if not os.path.exists(file_name):
         raise Exception('{0} is not found.'.format(file_name))
     # A list of [information, n, k, coder]
-    config = configparser.ConfigParser()
+    config = ConfigParser()
     config.read(file_name)
     section_name = 'coder'
     if section_name not in config.sections():

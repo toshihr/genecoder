@@ -18,14 +18,14 @@ class TestStatMode:
     def setup_class(clazz):
         try:
             shutil.rmtree(outdir)
-        except FileNotFoundError:
+        except:
             pass
 
     @classmethod
     def teardown_class(clazz):
         try:
             shutil.rmtree(outdir)
-        except FileNotFoundError:
+        except:
             pass
 
     def setup(self):
@@ -38,8 +38,8 @@ class TestStatMode:
         # run
         assert run(shlex.split('-stat -code bch_n3_1 -o {0} {1}'.format(outdir, absname))) == 0
 
-        with open(outfile, 'r', newline='') as fin:
-            reader = csv.DictReader(fin, delimiter=',', quotechar='"')
+        with open(outfile, 'rU') as fin:
+            reader = csv.DictReader(fin, delimiter=b',', quotechar=b'"')
             line = next(reader)
             answer = {'region': 'L3', 'gf4': 'ATGC', 'n1': '104'}
             assert all([line[k] == v for k, v in answer.items()]) is True

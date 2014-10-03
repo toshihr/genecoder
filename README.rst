@@ -1,4 +1,4 @@
-pipGeneCoder [WIP]
+genecoder [WIP]
 =========
 
 work in progress.
@@ -44,12 +44,16 @@ Install
     $ pip install git+https://github.com/kerug/genecoder.git
     $ pyside_postinstall.py -install
 
-Build
+Build & Development & test
 -----
 
 ::
 
-    $ pip install -r requirements.txt
+    $ git clone https://github.com/kerug/genecoder.git
+    $ pip install -r test-requirements.txt
+    $ python setup.py build
+    $ python setup.py test
+    $ python setup.py install
 
 
 File Format

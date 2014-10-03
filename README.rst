@@ -1,4 +1,4 @@
-GeneCoder [WIP]
+pipGeneCoder [WIP]
 =========
 
 work in progress.
@@ -32,6 +32,9 @@ Install Qt4 is as follows:
 python & pip
 ~~~~~~~~~~~~
 
+::
+
+    $
 
 Install
 -------

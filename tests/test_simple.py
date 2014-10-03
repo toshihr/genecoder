@@ -1,4 +1,4 @@
-from genecoder.main import main
+from genecoder.main import run
 import shlex
 
 
@@ -19,4 +19,4 @@ class TestAdd:
         pass
 
     def test_simple1(self):
-        assert main(shlex.split('genecoder -code bch_n3_1 -seq seq1 TTTCTTATTGTT')) == 0
+        assert run(shlex.split('-code bch_n3_1 -seq seq1 TTTCTTATTGTT')) == 0

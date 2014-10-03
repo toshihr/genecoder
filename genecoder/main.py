@@ -111,6 +111,8 @@ def set_parameters_CUI(argv):
     # --- set parameters ---
     global parameters
 
+    parameters = {}
+
     def setParams_GF4():
         # set coordinate of GF4 elements
         parameters['GF4'] = []
@@ -140,12 +142,9 @@ def set_parameters_CUI(argv):
             sys.exit(1)
 
     # initialize options for gui mode
-    parameters['input database'] = os.path.abspath(
-        options.infile) if options.infile != '' else ''
-    parameters['output stat'] = os.path.abspath(
-        options.output) if options.output != '' else ''
-    parameters['output'] = os.path.abspath(
-        options.output) if options.output != '' else ''
+    parameters['input database'] = os.path.abspath(options.infile) if options.infile != '' else ''
+    parameters['output stat'] = os.path.abspath(options.output) if options.output != '' else ''
+    parameters['output'] = os.path.abspath(options.output) if options.output != '' else ''
     parameters['input sequences'] = []
 
     # set other options
@@ -153,8 +152,7 @@ def set_parameters_CUI(argv):
     analyze.verboseWarning = options.verbose
     analyze.quietErr = options.quieterr
     parameters['gui mode'] = options.gui
-    parameters[
-        'mode'] = options.mode if options.mode is not None else 'standard'
+    parameters['mode'] = options.mode if options.mode is not None else 'standard'
 
     if parameters['mode'] == 'stat_with_graph':
         parameters['mode'] = 'stat'
@@ -258,18 +256,6 @@ def analyze_and_output():
 
 
 def run(argv):
-    # s1 = 'ACCTACCAGGGCAGCTACGGTTTCCGTCTGGGCTTCTTGCATTCTGGGACAGCCAAGTCTGTGACTTGCACGTACTCCCCTGC' +
-    #      'CCTCAACCAGATGTTTTGCCAACTGGCCAAGACCTGCCCTGTGCAGCTGTGGGTTGATTCCACACCCCCGCCCGGCACCCGCG' +
-    #      'TCCGCGCCATGGCCATCTACAAGCAGTCACAGCACATGACGGAGGTTGTGAGGCGCTGCCCCCACCATGAGCGCTGCTCAGAT' +
-    #      'AGCGATGGTCTGGCCCCTCCTCAGCATCTTATCCGAGTGGAAGGAAATTTGCGTGTGGAGTATTTGGATGACAGAAACACTTT' +
-    #      'TCGACATAGTGTGGTGGTGCCCTATGAGCCGCCTGAGGTTGGCTCTGACTGTACCACCATCCACTACAACTACATGTGTAACA' +
-    #      'GTTCCTGCATGGGCGGCATGAACCGGAGGCCCATCCTCACCATCATCACACTGGAAGACTCCAGTGGTAATCTACTGGGACGG' +
-    #      'AACAGCTTTGAGGTGCGTGTTTGTGCCTGTCCTGGGAGAGACCGGCGCACAGAGGAAGAGAATCTCCGCAAGAAA'
-    # argv = sys.argv[1:] + ['-seq','seq1','ATGATGATGATGATG','-code','bch_n3_1','-code', 'bch_n3_2',
-    #                          '-c','Iwadare','-c','SelfOrtho']
-    # argv = sys.argv[1:] + ['-gui','-seq','seq1','ATGATGATGATGATG','-code','bch_n3_1','-o',
-    #                          'output.csv']
-    # argv = sys.argv[1:] + ['-h']
     # argv = sys.argv[1:] + ['-solve','3','-seq','seq1','TTTCTTATTGTT']
     # argv = sys.argv[1:] +
     #        ['-solve','9','-solve','6','-solve','3','-seq','seq1',s1,'-seq','seq2','TTTCTTATTGTT']

@@ -55,7 +55,7 @@ packages = find_packages(exclude=['tests'])
 extensions = list(chain.from_iterable(map(lambda s: _make_extensions(s + '.*'), packages)))
 
 if EXIST_CYTHON:
-    print('cythonizing...')
+    print('running cythonize')
     extensions = cythonize(extensions)
 
 setup(

@@ -12,3 +12,5 @@ dist
 .DS_Store
 .python-version
 .noseids
+
+tests/_tmpdir

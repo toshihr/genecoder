@@ -1,5 +1,7 @@
 genecoder [WIP]
 =========
+.. image:: https://travis-ci.org/kerug/genecoder.svg
+    :target: https://travis-ci.org/kerug/genecoder
 
 work in progress.
 

@@ -70,7 +70,7 @@ setup(
     author_email='keru.work@gmail.com',
     license='BSD',
     packages=packages,
-    package_data={'genecoder':['genecoder.ini']},
+    package_data={'genecoder': ['genecoder.ini']},
     install_requires=_install_requires(),
     tests_require=_test_requires(),
     test_suite='nose.collector',

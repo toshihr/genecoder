@@ -6,20 +6,14 @@ try:
 except ImportError:
     # Python 3 raise ImportError
     pass
-import sys
-import math
 import os
 import shutil
 import csv
 import tarfile
 import numpy as np
 from collections import OrderedDict
-from collections import Counter
-from collections import defaultdict
-from itertools import combinations
 from itertools import compress
 from genecoder.lab import bio
-from genecoder.lab import poly_gf4
 from genecoder.lab import stat
 
 # global parameters
@@ -802,170 +796,172 @@ def gen_RC_distance(seqs, coder, GF4_coordinate='ATGC'):
                fracToStr(bio.get_similarity(s1, s2)))
 
 
-def calc_combination(n, k):
-    return math.factorial(n) // math.factorial(n - k) // math.factorial(k)
+# def calc_combination(n, k):
+#     return math.factorial(n) // math.factorial(n - k) // math.factorial(k)
+#
+#
+# def analyze_estimate_code(csv_writer, parameters):
+#     # --- output the header ---
+#     header = (
+#         'name',
+#         'dna sequence',
+#         'n',
+#         'k',
+#         'generator',
+#         'frequency')
+#     csv_writer.writerow(header)
+#
+#     for (n,) in parameters['solve mode']:
+#         k = n * 2 // 3
+#         for (name, x_NA) in parameters['input sequences']:
+#             print()
+#             print(
+#                 'Solve mode: n={0},k={1},seqs={2}:{3}'.format(n, k, name, x_NA))
+#             # STEP 1: collect all unique blocks
+#             print('STEP 1: collect all unique blocks')
+#             U_X_list = []  # U_X_list = {(u,x) in U x X}
+#
+#             u_NA = bio.get_codon12(x_NA)
+#             x = bio.NA2GF(x_NA, table=bio.NA2GF_table)
+#             u = bio.NA2GF(u_NA, table=bio.NA2GF_table)
+#             if verboseWarning and len(x) % n != 0:
+#                 print('[WARNING]omit the tail')
+#                 x = x[:(len(x) // n) * n]
+#                 u = u[:(len(u) // k) * k]
+#             U_X_list.extend(list(zip(
+#                 (tuple(
+#                     u[i:i + k]) for i in range(0, len(u), k)), (tuple(x[i:i + n]) for i in range(
+#                     0, len(x), n)))))
+#             # make a unique U_X_list
+#             U_X_list = sorted(set(U_X_list), key=U_X_list.index)
+#             print('{{(u,x) in UxX}}={{{0}}}'.format(','.join(
+#                 ['({0},{1})'.format(bio.GF2NA(uu), bio.GF2NA(xx)) for (uu, xx) in U_X_list])))
+#             # STEP 2: count frequencies
+#             print()
+#             print('STEP 2: count uniq code frequencies')
+#             X_freq = Counter((xx for (uu, xx) in U_X_list))
+#             U_freq = Counter((uu for (uu, xx) in U_X_list))
+#             print('FREQUENCY OF X={0}'.format(
+#                 ','.join(['({0},{1})'.format(bio.GF2NA(xx), cc) for xx, cc in X_freq.items()])))
+#             print('FREQUENCY OF U={0}'.format(
+#                 ','.join(['({0},{1})'.format(bio.GF2NA(uu), cc) for uu, cc in U_freq.items()])))
+#             # STEP 3: calculation
+#             print()
+#             print('STEP 3: main calculation')
+#             if max(U_freq.values()) > 1:
+#                 num_non_uniq = sum(
+#                     [cc - 1 for cc in U_freq.values() if cc > 1])
+#                 num_uniq = sum([cc for cc in U_freq.values() if cc == 1])
+#                 print(('[ERROR 1]THERE EXIST {0}/{1} NON UNIQUE SILENT MUTATIONS.'
+#                        ' CAN NOT CONSTRUCT A UNIQUE LINEAR CODE').format(
+#                     num_non_uniq, num_non_uniq + num_uniq))
+#             else:
+#                 if len(U_freq.keys()) < k:
+#                     print(('[ERROR 2]NOT ENOUGH UNIQUE SEQUENCES:'
+#                            ' num(U)={0} should be more than k={1}').format(
+#                         len(U_freq.keys()), k))
+#                 else:
+#                     U_X_uniqMap_all = dict(U_X_list)
+#                     # print('U X map={0}'.format(U_X_uniqMap))
+#
+#                     # Aをmxn行列とするとき
+#                     # rank(Ab)>rank(A) => 解はない
+#                     # rank(Ab)=rankA<=n <=> Ax=bが解を持つ
+#                     # rank(Ab)=rankA=n <=> Ax=bがただ１つの解をもつ
+#                     # X = UG
+#                     # x_i = Ug_i <=> b=Ax
+#                     for num_samples in range(len(U_X_uniqMap_all), -1, -1):
+#                         print('samples={0}'.format(num_samples))
+#                         for a_U_X_uniqSet in combinations(U_X_uniqMap_all.items(), num_samples):
+#                             U_X_uniqMap = dict(a_U_X_uniqSet)
+#
+#                             U_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k, list(poly_gf4.flatten(
+#                                                        list(U_X_uniqMap.keys()))))
+#                             U_rank = U_matrix.rank()
+#                             if U_rank < k:
+#                                 print(
+#                                     '[ERROR 3]RANK(U)<k: rank(U)={0},k={1}'.format(U_rank, k))
+#                             else:
+#                                 num_ok_column = n * 2 // 3
+#                                 G = [0, ] * n
+#                                 # for i in range(0,n):
+#                                 # 12,45,78,..は単位行列の成分になっていることは自明。なので計算ははぶく
+#                                 for i in range(2, n, 3):
+#                                     x_i = [x_row[i]
+#                                            for x_row in U_X_uniqMap.values()]
+#                                     U_x_i_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k + 1, list(
+#                                         poly_gf4.flatten(list(zip(U_X_uniqMap.keys(), x_i)))))
+#                                     U_x_i_rank = U_x_i_matrix.rank()
+#                                     if U_rank == U_x_i_rank:
+#                                         num_ok_column += 1
+#                                         G[i] = U_matrix.solve(x_i)
+#                                         # print('there exist just 1 result!')
+#                                     else:
+#                                         G[i] = ['-', ] * k
+#                                         # print(('[ERROR 4]RANK(Ux_i)<RANK(U):'
+#                                         #        ' i={0},rank(Ux_i)={1},rank(U)={2}').format(
+#                                         #     i,U_x_i_rank,U_rank))
+#                                     # print('g_{0}={1}'.format(i,g_i))
+#
+#                                 if num_ok_column == n:
+#                                     print('A UNIQUE GENERATOR EXISTS!')
+#                                     print('samples={0}'.format(num_samples))
+#                                     print('U X set={0}'.format(','.join(['({0},{1})'.format(
+#                                         bio.GF2NA(kk), bio.GF2NA(v))
+#                                         for kk, v in U_X_uniqMap.items()])))
+#                                     print('G={0}'.format(G))
+#                                     sys.exit()
+#                                     # u_set = list(U_X_uniqMap.keys())
+#                                     # x_set = [U_X_uniqMap[u] for u in u_set]
+#                                     # G = poly_gf4.calc_generator_from_codes(x_set, u_set, n, k)
+#
+#                                     # line = []
+#                                     # line.append(name)
+#                                     # line.append(x_NA)
+#                                     # line.append(n)
+#                                     # line.append(k)
+#                                     # line.append(G.toLine())
+#                                     # line.append(1)
+#                                     # csv_writer.writerow(line)
+#                                 else:
+#                                     print('GENERATOR DOES NOT EXIST: {0}/{1} ok.'.format(
+#                                         num_ok_column, n))
+#
+#                                     # TODO: とりあえず方針をきめることが先
+#                                     continue
+#
+#                                     G_freq = defaultdict(int)
+#                                     num_trial = calc_combination(
+#                                         len(U_X_uniqMap.keys()), k)
+#                                     i_trial = 0
+#                                     num_G = 0
+#                                     for u_set in combinations(U_X_uniqMap.keys(), k):
+#                                         i_trial += 1
+#                                         if i_trial % 100 == 0:
+#                                             print('{0}/{1}: unique generators={2}/{3}'.format(
+#                                                 i_trial, num_trial, len(G_freq), num_G))
+#                                         if i_trial == 1000:
+#                                             sys.exit(0)
+#                                         x_set = [U_X_uniqMap[uu] for uu in u_set]
+#                                         try:
+#                                             G = poly_gf4.calc_generator_from_codes(
+#                                                 x_set, u_set, n, k)
+#                                             G_freq[G] += 1
+#                                             num_G += 1
+#                                         except:
+#                                             pass
+#                                         # print('U={0},X={1}:'.format(list(u_set),x_set))
+#                                         # print('G={0}'.format(G))
+#                                     for G, freq in G_freq.items():
+#                                         line = []
+#                                         line.append(name)
+#                                         line.append(x_NA)
+#                                         line.append(n)
+#                                         line.append(k)
+#                                         line.append(G.toLine())
+#                                         line.append(freq)
+#                                         csv_writer.writerow(line)
 
-
-def analyze_estimate_code(csv_writer, parameters):
-    # --- output the header ---
-    header = (
-        'name',
-        'dna sequence',
-        'n',
-        'k',
-        'generator',
-        'frequency')
-    csv_writer.writerow(header)
-
-    for (n,) in parameters['solve mode']:
-        k = n * 2 // 3
-        for (name, x_NA) in parameters['input sequences']:
-            print()
-            print(
-                'Solve mode: n={0},k={1},seqs={2}:{3}'.format(n, k, name, x_NA))
-            # STEP 1: collect all unique blocks
-            print('STEP 1: collect all unique blocks')
-            U_X_list = []  # U_X_list = {(u,x) in U x X}
-
-            u_NA = bio.get_codon12(x_NA)
-            x = bio.NA2GF(x_NA, table=bio.NA2GF_table)
-            u = bio.NA2GF(u_NA, table=bio.NA2GF_table)
-            if verboseWarning and len(x) % n != 0:
-                print('[WARNING]omit the tail')
-                x = x[:(len(x) // n) * n]
-                u = u[:(len(u) // k) * k]
-            U_X_list.extend(list(zip(
-                (tuple(u[i:i + k]) for i in range(0, len(u), k)), (tuple(x[i:i + n]) for i in range(
-                    0, len(x), n)))))
-            # make a unique U_X_list
-            U_X_list = sorted(set(U_X_list), key=U_X_list.index)
-            print('{{(u,x) in UxX}}={{{0}}}'.format(','.join(
-                ['({0},{1})'.format(bio.GF2NA(uu), bio.GF2NA(xx)) for (uu, xx) in U_X_list])))
-            # STEP 2: count frequencies
-            print()
-            print('STEP 2: count uniq code frequencies')
-            X_freq = Counter((xx for (uu, xx) in U_X_list))
-            U_freq = Counter((uu for (uu, xx) in U_X_list))
-            print('FREQUENCY OF X={0}'.format(
-                ','.join(['({0},{1})'.format(bio.GF2NA(xx), cc) for xx, cc in X_freq.items()])))
-            print('FREQUENCY OF U={0}'.format(
-                ','.join(['({0},{1})'.format(bio.GF2NA(uu), cc) for uu, cc in U_freq.items()])))
-            # STEP 3: calculation
-            print()
-            print('STEP 3: main calculation')
-            if max(U_freq.values()) > 1:
-                num_non_uniq = sum(
-                    [cc - 1 for cc in U_freq.values() if cc > 1])
-                num_uniq = sum([cc for cc in U_freq.values() if cc == 1])
-                print(('[ERROR 1]THERE EXIST {0}/{1} NON UNIQUE SILENT MUTATIONS.'
-                       ' CAN NOT CONSTRUCT A UNIQUE LINEAR CODE').format(
-                    num_non_uniq, num_non_uniq + num_uniq))
-            else:
-                if len(U_freq.keys()) < k:
-                    print(('[ERROR 2]NOT ENOUGH UNIQUE SEQUENCES:'
-                           ' num(U)={0} should be more than k={1}').format(
-                        len(U_freq.keys()), k))
-                else:
-                    U_X_uniqMap_all = dict(U_X_list)
-                    # print('U X map={0}'.format(U_X_uniqMap))
-
-                    # Aをmxn行列とするとき
-                    # rank(Ab)>rank(A) => 解はない
-                    # rank(Ab)=rankA<=n <=> Ax=bが解を持つ
-                    # rank(Ab)=rankA=n <=> Ax=bがただ１つの解をもつ
-                    # X = UG
-                    # x_i = Ug_i <=> b=Ax
-                    for num_samples in range(len(U_X_uniqMap_all), -1, -1):
-                        print('samples={0}'.format(num_samples))
-                        for a_U_X_uniqSet in combinations(U_X_uniqMap_all.items(), num_samples):
-                            U_X_uniqMap = dict(a_U_X_uniqSet)
-
-                            U_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k, list(poly_gf4.flatten(
-                                                       list(U_X_uniqMap.keys()))))
-                            U_rank = U_matrix.rank()
-                            if U_rank < k:
-                                print(
-                                    '[ERROR 3]RANK(U)<k: rank(U)={0},k={1}'.format(U_rank, k))
-                            else:
-                                num_ok_column = n * 2 // 3
-                                G = [0, ] * n
-                                # for i in range(0,n):
-                                # 12,45,78,..は単位行列の成分になっていることは自明。なので計算ははぶく
-                                for i in range(2, n, 3):
-                                    x_i = [x_row[i]
-                                           for x_row in U_X_uniqMap.values()]
-                                    U_x_i_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k + 1, list(
-                                        poly_gf4.flatten(list(zip(U_X_uniqMap.keys(), x_i)))))
-                                    U_x_i_rank = U_x_i_matrix.rank()
-                                    if U_rank == U_x_i_rank:
-                                        num_ok_column += 1
-                                        G[i] = U_matrix.solve(x_i)
-                                        # print('there exist just 1 result!')
-                                    else:
-                                        G[i] = ['-', ] * k
-                                        # print(('[ERROR 4]RANK(Ux_i)<RANK(U):'
-                                        #        ' i={0},rank(Ux_i)={1},rank(U)={2}').format(
-                                        #     i,U_x_i_rank,U_rank))
-                                    # print('g_{0}={1}'.format(i,g_i))
-
-                                if num_ok_column == n:
-                                    print('A UNIQUE GENERATOR EXISTS!')
-                                    print('samples={0}'.format(num_samples))
-                                    print('U X set={0}'.format(','.join(['({0},{1})'.format(
-                                        bio.GF2NA(kk), bio.GF2NA(v))
-                                        for kk, v in U_X_uniqMap.items()])))
-                                    print('G={0}'.format(G))
-                                    sys.exit()
-                                    # u_set = list(U_X_uniqMap.keys())
-                                    # x_set = [U_X_uniqMap[u] for u in u_set]
-                                    # G = poly_gf4.calc_generator_from_codes(x_set, u_set, n, k)
-
-                                    # line = []
-                                    # line.append(name)
-                                    # line.append(x_NA)
-                                    # line.append(n)
-                                    # line.append(k)
-                                    # line.append(G.toLine())
-                                    # line.append(1)
-                                    # csv_writer.writerow(line)
-                                else:
-                                    print('GENERATOR DOES NOT EXIST: {0}/{1} ok.'.format(
-                                        num_ok_column, n))
-
-                                    # TODO: とりあえず方針をきめることが先
-                                    continue
-
-                                    G_freq = defaultdict(int)
-                                    num_trial = calc_combination(
-                                        len(U_X_uniqMap.keys()), k)
-                                    i_trial = 0
-                                    num_G = 0
-                                    for u_set in combinations(U_X_uniqMap.keys(), k):
-                                        i_trial += 1
-                                        if i_trial % 100 == 0:
-                                            print('{0}/{1}: unique generators={2}/{3}'.format(
-                                                i_trial, num_trial, len(G_freq), num_G))
-                                        if i_trial == 1000:
-                                            sys.exit(0)
-                                        x_set = [U_X_uniqMap[uu] for uu in u_set]
-                                        try:
-                                            G = poly_gf4.calc_generator_from_codes(
-                                                x_set, u_set, n, k)
-                                            G_freq[G] += 1
-                                            num_G += 1
-                                        except:
-                                            pass
-                                        # print('U={0},X={1}:'.format(list(u_set),x_set))
-                                        # print('G={0}'.format(G))
-                                    for G, freq in G_freq.items():
-                                        line = []
-                                        line.append(name)
-                                        line.append(x_NA)
-                                        line.append(n)
-                                        line.append(k)
-                                        line.append(G.toLine())
-                                        line.append(freq)
-                                        csv_writer.writerow(line)
 
 if __name__ == '__main__':
     import doctest

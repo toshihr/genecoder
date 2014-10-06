@@ -219,10 +219,10 @@ def analyze_and_output():
             csv_writer = csv.writer(output, delimiter=',', quotechar='"')
 
             # --- calculate generator matrix mode ---
-            if parameters['mode'] == 'solve':
-                analyze.analyze_estimate_code(csv_writer, parameters)
+            # if parameters['mode'] == 'solve':
+            #     analyze.analyze_estimate_code(csv_writer, parameters)
             # --- standard analyze mode ---
-            elif parameters['mode'] == 'standard':
+            if parameters['mode'] == 'standard':
                 # --- output the header ---
                 header = (
                     'name',

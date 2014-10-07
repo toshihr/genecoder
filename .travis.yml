@@ -22,6 +22,6 @@ install:
 #    - pip install --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
     # Travis CI servers use virtualenvs, so we need to finish the install by the following
 #    - conda install -c https://conda.binstar.org/pyzo pyside-pyzo
-    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
+#    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
     - python setup.py install
 script: nosetests

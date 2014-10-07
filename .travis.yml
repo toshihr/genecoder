@@ -17,11 +17,12 @@ before_install:
 # Install packages
 install:
     - sudo apt-get install libqt4-dev
-    - conda install --yes python=$TRAVIS_PYTHON_VERSION setuptools numpy scipy matplotlib nose dateutil
+    - conda install --yes python=$TRAVIS_PYTHON_VERSION pyside setuptools numpy scipy matplotlib nose dateutil
+    - sed '/./s/PySide//g' requirements.txt > requirements.txt
 #    - pip install pytest  # not yet available for py3 in anaconda
-    - pip install --no-index --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
+#    - pip install --no-index --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
     # Travis CI servers use virtualenvs, so we need to finish the install by the following
 #    - conda install -c https://conda.binstar.org/pyzo pyside-pyzo
-    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
+#    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
     - python setup.py install
 script: nosetests

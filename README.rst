@@ -7,17 +7,17 @@ work in progress.
 
 
 Requirements
-------------
+============
 
 - python & pip
 - Qt4
 
 
 Install Requirements
---------------------
+====================
 
-Qt4
-~~~
+Qt4 (Mac OS X)
+--------------
 
 Install Qt4 via Homebrew is recommended. Install Homebrew is as follows:
 
@@ -31,15 +31,15 @@ Install Qt4 is as follows:
 
     $ brew install qt
 
-python & pip
-~~~~~~~~~~~~
+Qt4 (Ubuntu)
+------------
 
 ::
 
-    $
+    $ sudo apt-get install libqt4-dev
 
-Install
--------
+Install genecoder
+=================
 
 ::
 
@@ -47,7 +47,7 @@ Install
     $ pyside_postinstall.py -install
 
 Build & Development & test
------
+--------------------------
 
 ::
 
@@ -56,6 +56,7 @@ Build & Development & test
     $ python setup.py build
     $ python setup.py test
     $ python setup.py install
+
 
 
 File Format

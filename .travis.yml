@@ -4,8 +4,11 @@ python:
     - "3.2_with_system_site_packages"
 before_install:
     - sudo apt-get update
-    - sudo apt-get install python-numpy python-scipy
+    - sudo apt-get install libblas-dev liblapack-dev gfortran
+    - sudo apt-get install python-numpy python-scipy python-matplotlib
     - sudo apt-get install libqt4-dev
+    - sudo pip install numpy --upgrade
+    - sudo pip install scipy --upgrade
 install:
     - pip install -q --use-mirrors python-dateutil
     - pip install PySide --no-index --find-links https://parkin.github.io/python-wheelhouse/

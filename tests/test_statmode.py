@@ -39,7 +39,7 @@ class TestStatMode:
         assert run(shlex.split('-stat -code bch_n3_1 -o {0} {1}'.format(outdir, absname))) == 0
 
         with open(outfile, 'rU') as fin:
-            reader = csv.DictReader(fin, delimiter=b',', quotechar=b'"')
+            reader = csv.DictReader(fin)
             line = next(reader)
             answer = {'region': 'L3', 'gf4': 'ATGC', 'n1': '104'}
             assert all([line[k] == v for k, v in answer.items()]) is True

@@ -5,10 +5,15 @@ try:
 except ImportError:
     # Python 3 raise ImportError
     pass
+try:
+    # Python 3
+    from configparser import ConfigParser
+except ImportError:
+    # Python 2
+    from ConfigParser import ConfigParser
 import argparse
 import sys
 import csv
-from ConfigParser import ConfigParser
 import os
 import itertools
 from genecoder.lab import analyze

@@ -601,7 +601,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
         lifeData = []
         lifeData_dict = OrderedDict()
         with open(database, 'rU') as fin:
-            csv_reader = csv.reader(fin, delimiter=b',', quotechar=b'"')
+            csv_reader = csv.reader(fin)
             for a_line in gen_table(csv_reader=csv_reader, columns=lifeData_columns,
                                     accept_filters=None, omit_filters=lifeData_omit):
                 lifeData.append(a_line)
@@ -652,8 +652,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                     out_dir, a_region, a_coordinate_of_GF4, 'RC.csv')
                 os.mkdir(os.path.dirname(outRC))
                 with open(outRC, 'w') as out_file:
-                    csv_writer = csv.writer(
-                        out_file, delimiter=b',', quotechar=b'"')
+                    csv_writer = csv.writer(out_file)
                     csv_writer.writerow(csv_RC_header)
                     # STEP 3.2: LOOP w.r.t. coder
                     for (coder_id, coder_detail, n, k, a_coder) in map(
@@ -721,7 +720,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                           'median(t)1', 'median(t)2', 'W', 'var(W)', 'z-value',
                           'wilcox p-value', 'chi-squared', 'logrank p-value', 'group1',
                           'group2', 'group1 RC', 'group2 RC']
-            csv_writer = csv.writer(out_file, delimiter=b',', quotechar=b'"')
+            csv_writer = csv.writer(out_file)
             csv_writer.writerow(header_all)
             for path, dirs, files in os.walk(out_dir):
                 for a_file in files:
@@ -732,8 +731,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                     name_nodes = full_name[
                         len(os.path.abspath(out_dir)) + len(os.path.sep):].split(os.path.sep)
                     with open(full_name, 'rU') as fin:
-                        csv_reader = csv.reader(
-                            fin, delimiter=b',', quotechar=b'"')
+                        csv_reader = csv.reader(fin)
                         # ヘッダを空読み
                         next(csv_reader)
                         for a_line in csv_reader:

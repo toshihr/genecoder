@@ -1,11 +1,12 @@
-# References: [1] https://github.com/Jorge-C/ordination/blob/master/.travis.yml
-#             [2] https://gist.github.com/dan-blanchard/7045057
+# Reference: https://gist.github.com/dan-blanchard/7045057
 language: python
 python:
     - 2.7
     - 3.4
 # Setup anaconda
 before_install:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
     - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
     - ./miniconda.sh -b
@@ -18,11 +19,7 @@ before_install:
 install:
     - sudo apt-get install libqt4-dev
     - conda install --yes python=$TRAVIS_PYTHON_VERSION pyside setuptools numpy scipy matplotlib nose dateutil
+    # Omit pip install PySide
     - sed '/./s/PySide//g' requirements.txt > requirements.txt
-#    - pip install pytest  # not yet available for py3 in anaconda
-#    - pip install --no-index --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
-    # Travis CI servers use virtualenvs, so we need to finish the install by the following
-#    - conda install -c https://conda.binstar.org/pyzo pyside-pyzo
-#    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
     - python setup.py develop
 script: nosetests

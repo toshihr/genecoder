@@ -1,4 +1,4 @@
-genecoder [WIP]
+genecoder: 遺伝子配列(CDS)に対し符号解析を行うソフト [WIP]
 =========
 .. image:: https://travis-ci.org/kerug/genecoder.svg
     :target: https://travis-ci.org/kerug/genecoder

@@ -17,7 +17,7 @@ before_install:
 # Install packages
 install:
     - sudo apt-get install libqt4-dev
-    - conda install --yes python=$TRAVIS_PYTHON_VERSION setuptools numpy scipy matplotlib nose dateutil
+    - conda install --yes python=$TRAVIS_PYTHON_VERSION pip setuptools numpy scipy matplotlib nose dateutil
 #    - pip install pytest  # not yet available for py3 in anaconda
     - pip install PySide --no-index --find-links https://parkin.github.io/python-wheelhouse/
     - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install

@@ -42,4 +42,8 @@ class TestStatMode:
             reader = csv.DictReader(fin)
             line = next(reader)
             answer = {'region': 'L3', 'gf4': 'ATGC', 'n1': '104'}
-            assert all([line[k] == v for k, v in answer.items()]) is True
+            try:
+                assert all([line[k] == v for k, v in answer.items()]) is True
+            except AssertionError as e:
+                print(line)
+                raise e

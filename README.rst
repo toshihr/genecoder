@@ -12,11 +12,14 @@ Requirements
 Qt4 (Mac OS X)
 --------------
 
-Install Qt4 via Homebrew is recommended. Install Homebrew is as follows:
+Install Qt4 via Homebrew is recommended. Install Homebrew_ is as follows:
 
 ::
 
     $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+.. _Homebrew: http://brew.sh/
+
 
 Install Qt4 is as follows:
 
@@ -36,7 +39,7 @@ How to install
 
 The genecoder can be installed via pip_.
 
-.. _pip:https://pip.pypa.io/en/latest/installing.html
+.. _pip: https://pip.pypa.io/en/latest/installing.html
 
 ::
 
@@ -107,10 +110,16 @@ Columns should be the followings:
 How to develop
 ==============
 
-Developers should use pyenv_ and pyenv-virtualenv_.
+Developers should use pyenv_ and `pyenv-virtualenv`_.
 
-.. _pyenv:https://github.com/yyuu/pyenv
-.. _pyenv-virtualenv:https://github.com/yyuu/pyenv-virtualenv
+.. _pyenv: https://github.com/yyuu/pyenv
+.. _pyenv-virtualenv: https://github.com/yyuu/pyenv-virtualenv
+
+Mac OS X users can be installed via Homebrew:
+
+::
+
+    $ brew install pyenv-virtualenv
 
 
 How to construct an environment:
@@ -129,10 +138,13 @@ How to construct an environment:
     $ pip install -r test-requirements.txt
     $ pip3 install -r test-requirements.txt
 
+
 Tests for Python 2 & 3:
 
 ::
+
     $ tox
+
 
 Alternatively,
 
@@ -140,12 +152,14 @@ Alternatively,
 
     $ python setup.py test
 
+
 Sometimes, the following commands are needed:
 
 ::
 
     $ pyside_postinstall.py -install
     $ pyenv rehash
+
 
 Qt creator's user-interface (*.ui) can be converted to python code as follows:
 
@@ -158,5 +172,8 @@ References
 ==========
 
 - Sato Keiko, Toshihide Hara, and Masanori Ohya. "The code structure of the p53 DNA-binding domain
-  and the prognosis of breast cancer patients." Bioinformatics 29.22 (2013): 2822-2825.
+  and the prognosis of breast cancer patients." Bioinformatics 29.22 (2013): 2822-2825. [Link_]
 - http://theory.cs.uvic.ca/gen/poly.html
+
+.. _Link: http://www.ncbi.nlm.nih.gov/pubmed/23986567
+

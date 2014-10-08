@@ -52,16 +52,6 @@ def loadResource(file_name):
     for a_coder_name in a_coder_name_list:
         coder_list[a_coder_name] = eval(config.get(section_name, a_coder_name))
 
-    # coder_list = {
-    # 	'bch1':('BCH code: g(x) = x + 1',3,2, Coder_BCH(g_x=[1,1],n=3)),
-    # 	'bch2':('BCH code: g(x) = x^5 + a^2x^4 + a^2x^3 + a^2x^2 + a^2x + a',15,10,
-    #       Coder_BCH(g_x=[1,3,3,3,3,2],n=15)),
-    # 	'iwadare':('Iwadare code:',3,2, coder_Iwadare),
-    # 	'selfortho':('self-orthogonal code:',3,2, coder_SelfOrthogonal),
-    # }
-    # print(coder_list)
-    # sys.exit()
-
 
 def set_parameters_CUI(argv):
     '''

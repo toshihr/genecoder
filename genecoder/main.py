@@ -217,11 +217,11 @@ def analyze_and_output():
     else:
         try:
             if parameters['output'] != '':
-                output = open(parameters['output'], 'w', newline='')
+                output = open(parameters['output'], 'w')
             else:
                 output = sys.stdout
 
-            csv_writer = csv.writer(output, delimiter=',', quotechar='"')
+            csv_writer = csv.writer(output)
 
             # --- calculate generator matrix mode ---
             # if parameters['mode'] == 'solve':

@@ -722,7 +722,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                           'group2', 'group1 RC', 'group2 RC']
             csv_writer = csv.writer(out_file)
             csv_writer.writerow(header_all)
-            for path, dirs, files in os.walk(out_dir):
+            for path, dirs, files in sorted(list(os.walk(out_dir))):
                 for a_file in files:
                     if a_file != 'STAT.csv':
                         continue

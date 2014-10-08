@@ -1126,6 +1126,7 @@ static PyObject *__pyx_builtin_any;
 static PyObject *__pyx_builtin_all;
 static PyObject *__pyx_builtin_open;
 static PyObject *__pyx_builtin_print;
+static PyObject *__pyx_builtin_sorted;
 static PyObject *__pyx_lambda_funcdef_9genecoder_3lab_7analyze_lambda1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_9genecoder_3lab_7analyze_pack(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_absdir, PyObject *__pyx_v_erase); /* proto */
 static PyObject *__pyx_pf_9genecoder_3lab_7analyze_9gen_table_genexpr(PyObject *__pyx_self); /* proto */
@@ -1302,6 +1303,7 @@ static char __pyx_k_remove[] = "remove";
 static char __pyx_k_rmtree[] = "rmtree";
 static char __pyx_k_seq_na[] = "seq_na";
 static char __pyx_k_shutil[] = "shutil";
+static char __pyx_k_sorted[] = "sorted";
 static char __pyx_k_unique[] = "unique";
 static char __pyx_k_values[] = "values";
 static char __pyx_k_writer[] = "writer";
@@ -1854,6 +1856,7 @@ static PyObject *__pyx_kp_u_similarity_between_original_dna;
 static PyObject *__pyx_n_s_simirarity;
 static PyObject *__pyx_n_s_size;
 static PyObject *__pyx_n_s_skip;
+static PyObject *__pyx_n_s_sorted;
 static PyObject *__pyx_n_s_split;
 static PyObject *__pyx_n_s_stat;
 static PyObject *__pyx_n_s_stat_event;
@@ -17246,7 +17249,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
  *                           'group2', 'group1 RC', 'group2 RC']
  *             csv_writer = csv.writer(out_file)             # <<<<<<<<<<<<<<
  *             csv_writer.writerow(header_all)
- *             for path, dirs, files in os.walk(out_dir):
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):
  */
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_csv); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
             __Pyx_GOTREF(__pyx_t_2);
@@ -17285,7 +17288,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
  *                           'group2', 'group1 RC', 'group2 RC']
  *             csv_writer = csv.writer(out_file)
  *             csv_writer.writerow(header_all)             # <<<<<<<<<<<<<<
- *             for path, dirs, files in os.walk(out_dir):
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):
  *                 for a_file in files:
  */
             __pyx_t_23 = __Pyx_PyObject_GetAttrStr(__pyx_v_csv_writer, __pyx_n_s_writerow); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
@@ -17320,7 +17323,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
             /* "genecoder/lab/analyze.pyx":725
  *             csv_writer = csv.writer(out_file)
  *             csv_writer.writerow(header_all)
- *             for path, dirs, files in os.walk(out_dir):             # <<<<<<<<<<<<<<
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):             # <<<<<<<<<<<<<<
  *                 for a_file in files:
  *                     if a_file != 'STAT.csv':
  */
@@ -17353,6 +17356,22 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
               __Pyx_GOTREF(__pyx_t_3);
               __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
             }
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
+            __Pyx_GOTREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
+            __Pyx_GIVEREF(__pyx_t_3);
+            __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyList_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
+            __Pyx_GOTREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
+            __Pyx_GIVEREF(__pyx_t_3);
+            __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L96_error;}
+            __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
               __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_5 = 0;
@@ -17458,7 +17477,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
 
               /* "genecoder/lab/analyze.pyx":726
  *             csv_writer.writerow(header_all)
- *             for path, dirs, files in os.walk(out_dir):
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):
  *                 for a_file in files:             # <<<<<<<<<<<<<<
  *                     if a_file != 'STAT.csv':
  *                         continue
@@ -17504,7 +17523,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
                 __pyx_t_4 = 0;
 
                 /* "genecoder/lab/analyze.pyx":727
- *             for path, dirs, files in os.walk(out_dir):
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):
  *                 for a_file in files:
  *                     if a_file != 'STAT.csv':             # <<<<<<<<<<<<<<
  *                         continue
@@ -18022,7 +18041,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
 
                 /* "genecoder/lab/analyze.pyx":726
  *             csv_writer.writerow(header_all)
- *             for path, dirs, files in os.walk(out_dir):
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):
  *                 for a_file in files:             # <<<<<<<<<<<<<<
  *                     if a_file != 'STAT.csv':
  *                         continue
@@ -18034,7 +18053,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_7analyze_15analyze_survivalTest_for_da
               /* "genecoder/lab/analyze.pyx":725
  *             csv_writer = csv.writer(out_file)
  *             csv_writer.writerow(header_all)
- *             for path, dirs, files in os.walk(out_dir):             # <<<<<<<<<<<<<<
+ *             for path, dirs, files in sorted(list(os.walk(out_dir))):             # <<<<<<<<<<<<<<
  *                 for a_file in files:
  *                     if a_file != 'STAT.csv':
  */
@@ -21451,6 +21470,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_simirarity, __pyx_k_simirarity, sizeof(__pyx_k_simirarity), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
   {&__pyx_n_s_skip, __pyx_k_skip, sizeof(__pyx_k_skip), 0, 0, 1, 1},
+  {&__pyx_n_s_sorted, __pyx_k_sorted, sizeof(__pyx_k_sorted), 0, 0, 1, 1},
   {&__pyx_n_s_split, __pyx_k_split, sizeof(__pyx_k_split), 0, 0, 1, 1},
   {&__pyx_n_s_stat, __pyx_k_stat, sizeof(__pyx_k_stat), 0, 0, 1, 1},
   {&__pyx_n_s_stat_event, __pyx_k_stat_event, sizeof(__pyx_k_stat_event), 0, 0, 1, 1},
@@ -21508,6 +21528,7 @@ static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_all = __Pyx_GetBuiltinName(__pyx_n_s_all); if (!__pyx_builtin_all) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_sorted = __Pyx_GetBuiltinName(__pyx_n_s_sorted); if (!__pyx_builtin_sorted) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;

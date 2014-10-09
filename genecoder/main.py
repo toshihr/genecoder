@@ -30,9 +30,13 @@ try:
 except:
     pass
 
-# --- global variables ---
+# === global variables ===
+
 parameters = {}
 coder_list = {}
+
+
+# === functions ===
 
 
 def loadResource(file_name):

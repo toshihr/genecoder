@@ -15,6 +15,7 @@ import os
 
 # old manually created format
 L2L3 = dict(
+    mode_use_mutation_column=False,
     filter_wildtype={'domain': ('Wild Type',)},
     filter_only_for={},
     filter_omit={},
@@ -28,6 +29,7 @@ L2L3 = dict(
 )
 
 IARC = dict(
+    mode_use_mutation_column=True,
     filter_wildtype={},
     filter_only_for={'Short_topo': ('COLON',), 'Tumor_origin': ('primary',)},
     filter_omit={'Type': ('del', 'CC tandem', 'complex', 'ins', 'NA', 'tandem'), },
@@ -112,9 +114,9 @@ def parse_mutation(mutant_str, mutation_format):
 def convert(mutations_filename=os.path.join(__ROOT_DIR, 'mutation_data', 'L2L3database.csv'),
             seq_na_filename=os.path.join(__ROOT_DIR, 'seq_data', 'tp53_NM_000546.fasta'),
             seq_aa_filename=os.path.join(__ROOT_DIR, 'seq_data', 'P04637.fasta'),
-            mode_use_mutation_column=False,
             search_regions=list(regions.keys()),
-            csv_writer=csv.writer(sys.stdout),
+            fout=sys.stdout,
+            mode_use_mutation_column=False,
             filter_wildtype={},
             filter_only_for={},
             filter_omit={},
@@ -128,10 +130,11 @@ def convert(mutations_filename=os.path.join(__ROOT_DIR, 'mutation_data', 'L2L3da
     mutations_filename: mutation database (IARC TP53database, L2L3)
     seq_na_filename: coding sequence (only exons)
     seq_aa_filename: protein sequence
+    search_regions: 変異の位置がここで指定した領域内である行のみが出力される
+    fout: output
+    ===DATABASE DEPEND PARAMETER===
     mode_use_mutation_column ==  True: column_mutation_NA,AAの変異情報を使う
                              == False: (codon_number,wildtype_codon,mutant_codon) の情報を使う
-    search_regions: 変異の位置がここで指定した領域内である行のみが出力される
-    ===DATABASE DEPEND PARAMETER===
     filter_wildtype: wildtype行の指定．ここで指定したカラムが指定した文字列群である行は強制で出力
                      するとともに，配列も生成される
     filter_only_for: ここで指定したカラムが指定した文字列群である行だけが対象となる
@@ -148,6 +151,8 @@ def convert(mutations_filename=os.path.join(__ROOT_DIR, 'mutation_data', 'L2L3da
     converter.convert(mutations_filename='***', *converter.T2T3)
 
     '''
+
+    csv_writer = csv.writer(fout)
 
     # read the wildtype sequences
     (name_na, seq_na) = fasta_reader(seq_na_filename)

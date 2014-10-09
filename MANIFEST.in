@@ -1,4 +1,4 @@
-recursive-include genecoder *.pyx *.ini
+recursive-include genecoder *.pyx *.ini *.csv *.fasta *.genbank
 recursive-include tests *.py
 include requirements.txt
 include test-requirements.txt

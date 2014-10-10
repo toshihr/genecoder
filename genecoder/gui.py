@@ -3,15 +3,14 @@ import itertools
 from io import StringIO
 from PySide import QtCore, QtGui
 from genecoder.mainwindow import Ui_MainWindow
-from genecoder.main import coder_list, parameters, analyze_and_output
 from genecoder.lab.fasta import Fasta
+from genecoder.resource import CODERS
+from genecoder.main import mode_stat, mode_distance
+
+pipe_args = {}
 
 
 class MyMainWindow(QtGui.QMainWindow):
-
-    '''
-    TODO: Drag&DropでCodeの順番を変えられるようにする
-    '''
 
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
@@ -71,24 +70,27 @@ class MyMainWindow(QtGui.QMainWindow):
             QtGui.QAbstractItemView.ContiguousSelection)
 
         # initialize codeListView from parameters['coders']
-        for a_code in coder_list.keys():
+        for a_code in CODERS.keys():
             item = QtGui.QStandardItem(a_code)
             item.setEditable(False)
-            item.setToolTip(coder_list[a_code][0])
-            if a_code in parameters['coders']:
+            item.setToolTip(CODERS[a_code][0])
+            if a_code in pipe_args['--coder']:
                 self.model_enable.appendRow(item)
             else:
                 self.model_disable.appendRow(item)
 
         # initialize coordinate of GF4 elements
-        if len(parameters['GF4']) == 24:
+        if len(pipe_args['--gf4']) == 24:
             self.ui.checkBox_GF4_all.setChecked(True)
         else:
-            parameters['GF4'] = [parameters['GF4'][-1], ]
-            self.ui.lineEdit_GF4.setText(parameters['GF4'][0])
+            if(len(pipe_args['--gf4']) > 0):
+                self.ui.lineEdit_GF4.setText(pipe_args['--gf4'][0])
 
         # initialize filename
-        self.ui.lineEdit_output.setText(parameters['output'])
+        if pipe_args['distance']:
+            self.ui.lineEdit_output.setText(pipe_args['--output'])
+        elif pipe_args['stat']:
+            self.ui.lineEdit_output.setText(pipe_args['--outdir'])
 
         # initialize input sequences
         self.refreshSequences()
@@ -97,63 +99,62 @@ class MyMainWindow(QtGui.QMainWindow):
     def run(self):
         # treat coordinate of GF4 elements
         if self.ui.checkBox_GF4_all.isChecked():
-            parameters['GF4'] = [''.join(x)
-                                 for x in itertools.permutations('ATGC')]
+            pipe_args['--gf4'] = [''.join(x) for x in itertools.permutations('ATGC')]
         else:
-            parameters['GF4'] = [self.ui.lineEdit_GF4.text().upper(), ]
+            pipe_args['--gf4'] = [self.ui.lineEdit_GF4.text().upper(), ]
 
-        # mode 0
+        # mode 0 (stat mode)
         if self.ui.stackedWidget_mode.currentIndex() == 0:
-            parameters['mode'] = 'stat'
-            if len(parameters['input database']) == 0:
-                QtGui.QMessageBox.information(
-                    self, 'Error', 'Need to select input database.')
-            elif len(parameters['output stat']) == 0:
-                QtGui.QMessageBox.information(
-                    self, 'Error', 'Need to select output directory.')
+            pipe_args['distance'] = None
+            pipe_args['stat'] = True
+            if len(pipe_args['--input']) == 0:
+                QtGui.QMessageBox.information(self, 'Error', 'Need to select input database.')
+            elif len(pipe_args['--outdir']) == 0:
+                QtGui.QMessageBox.information(self, 'Error', 'Need to select output directory.')
             else:
-                parameters['output stat'] = os.path.abspath(
-                    parameters['output stat'])
-                self.ui.lineEdit_output.setText(parameters['output stat'])
-                analyze_and_output()
-                QtGui.QMessageBox.information(
-                    self, 'Finished', 'The results are stored in {0}'
-                    .format(parameters['output stat']))
+                pipe_args['--ourdir'] = os.path.abspath(pipe_args['--ourdir'])
+                self.ui.lineEdit_output.setText(pipe_args['--ourdir'])
 
-        # mode 1
+                mode_stat(pipe_args)
+
+                QtGui.QMessageBox.information(self, 'Finished', 'The results are stored in {0}'
+                                                    .format(pipe_args['--outdir']))
+
+        # mode 1 (distance mode)
         else:
-            parameters['mode'] = 'standard'
+            pipe_args['distance'] = True
+            pipe_args['stat'] = None
             self.reconstructInputSequences()
-            if len(parameters['input sequences']) == 0:
-                QtGui.QMessageBox.information(
-                    self, 'Error', 'No sequences to analyze.')
-            elif len(parameters['output']) == 0:
-                QtGui.QMessageBox.information(
-                    self, 'Error', 'Need to put output file name.')
+            if len(pipe_args['--input']) == 0:
+                QtGui.QMessageBox.information(self, 'Error', 'No sequences to analyze.')
+            elif len(pipe_args['--output']) == 0:
+                QtGui.QMessageBox.information(self, 'Error', 'Need to put output file name.')
             else:
-                parameters['output'] = os.path.abspath(parameters['output'])
-                self.ui.lineEdit_output.setText(parameters['output'])
-                analyze_and_output()
+                pipe_args['--output'] = os.path.abspath(pipe_args['--output'])
+                self.ui.lineEdit_output.setText(pipe_args['--output'])
+
+                mode_distance(pipe_args)
+
                 QtGui.QMessageBox.information(
-                    self, 'Finished', 'The results are stored in {0}'.format(parameters['output']))
+                    self, 'Finished', 'The results are stored in {0}'.format(pipe_args['--output']))
                 # self.ok = True
                 # self.close()
 
     # Fasta Frame
     @QtCore.Slot()
     def clear_sequences(self):
-        parameters['input sequences'] = []
+        pipe_args['input sequences'] = []
         self.refreshSequences()
 
     @QtCore.Slot()
     def reconstructInputSequences(self):
         fasta = Fasta(StringIO(self.ui.plainTextEdit_input.toPlainText()))
-        parameters['input sequences'] = list(fasta.blocks)
+        pipe_args['input sequences'] = list(fasta.blocks)
 
     @QtCore.Slot()
     def refreshSequences(self):
         self.ui.plainTextEdit_input.clear()
-        for (a_name, a_seq) in parameters['input sequences']:
+        for (a_name, a_seq) in pipe_args['input sequences']:
             self.ui.plainTextEdit_input.appendPlainText('>' + a_name)
             self.ui.plainTextEdit_input.appendPlainText(a_seq)
 
@@ -171,7 +172,7 @@ class MyMainWindow(QtGui.QMainWindow):
         # container
         for a_item in items:
             self.model_enable.appendRow(a_item)
-            parameters['coders'].append(a_item.text())
+            pipe_args['--coder'].append(a_item.text())
 
     @QtCore.Slot()
     def toDisable(self):
@@ -187,7 +188,7 @@ class MyMainWindow(QtGui.QMainWindow):
         # container
         for a_item in items:
             self.model_disable.appendRow(a_item)
-            parameters['coders'].remove(a_item.text())
+            pipe_args['--coder'].remove(a_item.text())
 
     # mode 0
     @QtCore.Slot()
@@ -195,9 +196,8 @@ class MyMainWindow(QtGui.QMainWindow):
         file_name = QtGui.QFileDialog.getOpenFileName(
             self, self.tr('Select Input File'), '', self.tr('CSV (*.csv);;any file (*.*)'))[0]
         if file_name != '':
-            parameters['input database'] = file_name
-            self.ui.lineEdit_inputDatabase.setText(
-                parameters['input database'])
+            pipe_args['--input'] = file_name
+            self.ui.lineEdit_inputDatabase.setText(pipe_args['--input'])
 
     @QtCore.Slot()
     def selectOutDir(self):
@@ -205,16 +205,16 @@ class MyMainWindow(QtGui.QMainWindow):
         dir_name = QtGui.QFileDialog.getExistingDirectory(
             self, self.tr('Select Output Directory'))
         if dir_name != '':
-            parameters['output stat'] = dir_name
-            self.ui.lineEdit_output_stat.setText(parameters['output stat'])
+            pipe_args['--ourdir'] = dir_name
+            self.ui.lineEdit_output_stat.setText(pipe_args['--ourdir'])
 
     @QtCore.Slot()
     def outDirChanged(self, text):
-        parameters['output stat'] = text
+        pipe_args['--ourdir'] = text
 
     @QtCore.Slot()
     def inputDatabaseChanged(self, text):
-        parameters['input database'] = text
+        pipe_args['--input'] = text
 
     # mode 1
     @QtCore.Slot()
@@ -225,7 +225,7 @@ class MyMainWindow(QtGui.QMainWindow):
         if file_name != '':
             fasta = Fasta(open(file_name))
             self.ui.logTextBrowser.append(str(fasta.blocks))
-            parameters['input sequences'] += fasta.blocks
+            pipe_args['input sequences'] += [fasta.blocks]
             self.refreshSequences()
             self.ui.logTextBrowser.append(file_name)
 
@@ -237,9 +237,9 @@ class MyMainWindow(QtGui.QMainWindow):
         if file_name != '':
             if file_name[-4:] != '.csv':
                 file_name += '.csv'
-            parameters['output'] = file_name
-            self.ui.lineEdit_output.setText(parameters['output'])
+            pipe_args['--output'] = file_name
+            self.ui.lineEdit_output.setText(pipe_args['--output'])
 
     @QtCore.Slot()
     def outFileChanged(self, text):
-        parameters['output'] = text
+        pipe_args['--output'] = text

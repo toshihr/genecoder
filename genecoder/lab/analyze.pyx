@@ -15,6 +15,7 @@ from collections import OrderedDict
 from itertools import compress
 from genecoder.lab import bio
 from genecoder.lab import stat
+from genecoder.resource import CODERS
 
 # global parameters
 FracStyle = True
@@ -90,26 +91,6 @@ def gen_table(csv_reader, columns=None, accept_filters=None, omit_filters={}):
         # make a trimmed line, then append to the results
         yield [a_line[a_index] for a_index in index_columns]
 
-#  def mearge_table(key_index, tables):
-#     ''' 指定されたテーブル群から、key_indexの値が共通である行を合体させ新たにテーブルを作成する関数.
-#     生成されるテーブルの位置列目がキーとなる
-#     他の列は与えられたテーブルの順で右に付け足される
-#     '''
-# calculate the column_size
-#     column_size = sum(len(a_table[0]) for a_table in tables if len(a_table) > 0) - (len(tables)-1)
-# make a large dict s.t. key -> other column values
-#     all_data = defaultdict(list)
-#     for a_table in tables:
-#         for a_line in a_table:
-# TODO: ここでのpopで元のテーブルデータが破壊されていないか確認
-#         a_key = a_line.pop(key_index)
-#         all_data[a_key] += a_line
-# make a result
-#     results = []
-#     for k,v in all_data.items():
-#         results.append([k] + v)
-#     return results
-
 
 def gen_columns_from_table(table, column_indexes,
                            index_value__accept_filters=None, index_value__omit_filters={}):
@@ -147,12 +128,6 @@ def gen_columns_from_table(table, column_indexes,
             continue
         # make a trimmed line, then append to the results
         yield list(compress(a_line, flags_columns))
-
-# def gen_rows_from_table(table, column_index, values):
-#     ''' 指定した列の値がvaluesのどれかに一致する行のみを出力するジェネレータ関数. '''
-#     for a_line in table:
-#         if table[column_index] in values:
-#         yield a_line
 
 
 def survivalTest(data, km=True):
@@ -538,19 +513,13 @@ def analyze_survivalTest(out_file, values, events, times, seq_category, pre_data
     return True
 
 
-def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
+def analyze_survivalTest_for_database(out_dir, database, target_gf4, target_coders, drawGraph,
                                       databaseStyle='tp53'):
     ''' データベースに対し生存分析を行う関数.
-    input:
     out_dir: Fasta,RC,Statの各ファイルを格納するディレクトリ
     database: データベースファイル名(カラム群['mutation_id','seq_category','region_name','seq_na',
                                  'RFS(months)','RFS(event)','OS(months)','OS(event)']を含むCSV)
-               event in {'EVENT','STOP'}, seq_category in {'mutated','wildtype'}
-    parameters['GF4','coders']: 入力データに関する情報
-    coder_list: 全符号のデータベース
-    output:
-     parameters['input sequences']
-     csv_writer
+                                 event in {'EVENT','STOP'}, seq_category in {'mutated','wildtype'}
     生存分析用データがあるサンプルのみ計算する
     outFasta: [out_dir]/[basename(database)]/[region]/INPUT.fasta (multiple fasta)
     outRC:    [out_dir]/[basename(database)]/[region]/[GF4]/RC.csv
@@ -592,7 +561,8 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
         index_OS_event = 7
 
         '''
-        STEP 1: 生存分析用データを読み込む(高速検索用に辞書としても格納する.メモリ効率を考え辞書(key=mutation_id)には同じ行への参照を格納する)
+        STEP 1: 生存分析用データを読み込む(高速検索用に辞書としても格納する.
+        メモリ効率を考え辞書(key=mutation_id)には同じ行への参照を格納する)
         input: lifeData_columns of database
         output: lifeData, lifeData_dict, region_set, event_set
         {'non_recurrence_months': '', 'event1': '', 'overall_survival_months': '','event2': ''}
@@ -644,9 +614,11 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                 for a_name, a_seq in seqs_wrt_region:
                     fout.write('>{0}\n{1}\n'.format(a_name, a_seq))
             # STEP 3.1: LOOP w.r.t. GF4 coordinate (このループまででRC距離一覧が計算できる)
-            for a_coordinate_of_GF4 in parameters['GF4']:
-                # 指定された有限体対応におけるRC距離一覧を計算し出力(その領域の配列数x符号数分). RC距離はイベントによらない共通データであることに注意
-                # analyze_RC_distance()と機能的にかぶるが効率重視のためスクラッチで書く. RC距離ファイルのフォーマットを変えるときは注意.
+            for a_coordinate_of_GF4 in target_gf4:
+                # 指定された有限体対応におけるRC距離一覧を計算し出力(その領域の配列数x符号数分).
+                # RC距離はイベントによらない共通データであることに注意
+                # analyze_RC_distance()と機能的にかぶるが効率重視のためスクラッチで書く.
+                # RC距離ファイルのフォーマットを変えるときは注意.
                 # 出力先: [out_dir]/[basename(database)]_[date]/[region]/[GF4]/RC.csv
                 outRC = os.path.join(
                     out_dir, a_region, a_coordinate_of_GF4, 'RC.csv')
@@ -656,7 +628,7 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                     csv_writer.writerow(csv_RC_header)
                     # STEP 3.2: LOOP w.r.t. coder
                     for (coder_id, coder_detail, n, k, a_coder) in map(
-                            (lambda x: [x, ] + list(coder_list[x])), parameters['coders']):
+                            (lambda x: [x, ] + list(CODERS[x])), target_coders):
                         # 対象の符号によるRC距離を計算(各入力配列における値を逐次計算する)
                         name_RC_dict = OrderedDict()
                         for (a_name, s1, s2, AA1, AA2, RC, simirarity) in gen_RC_distance(
@@ -673,7 +645,8 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                         # name_RC_dict: {配列名:RC距離値}, note that
                         # 配列名は(領域,GF4対応)で絞り込まれている
                         for event_category, event_time_index, event_event_index in event_set:
-                            # 統計解析用データを選別(すでに絞り込み済みのname_RC_dict.keys()を利用する)
+                            # 統計解析用データを選別
+                            # すでに絞り込み済みのname_RC_dict.keys()を利用する
                             stat_value = list(name_RC_dict.values())
                             stat_time = [lifeData_dict[a_name][event_time_index]
                                          for a_name in name_RC_dict.keys()]
@@ -705,14 +678,15 @@ def analyze_survivalTest_for_database(out_dir, database, parameters, coder_list,
                                                          (('gf4', a_coordinate_of_GF4),
                                                           ('coder_id', coder_id))),
                                                      names=list(name_RC_dict.keys()),
-                                                     drawGraph=parameters['drawGraph'],
+                                                     drawGraph=drawGraph,
                                                      treatWildTypeAs3rdAxis=a_treatWildType,
                                                      outDirKM=outDirKM)
                         KMgenerated = True
         # mearge csv
         # 現在, WILDTYPEを取り除いて行った検定に関しては結果を収集せずグラフのみ描画する
         # ここで回収してしまうと, 区別がつかない行ができてしまうため
-        # WILDTYPEを取り除いて行った検定の結果に関しては, 最初から取り除いたデータを用意してプログラムを実行すれば得られる
+        # WILDTYPEを取り除いて行った検定の結果に関しては, 最初から取り除いたデータを用意して
+        # プログラムを実行すれば得られる
         outStatAll = os.path.join(out_dir, 'STAT_ALL.csv')
         with open(outStatAll, 'w') as out_file:
             header_all = ['region', 'gf4', 'coder', 'event'] + \
@@ -792,173 +766,6 @@ def gen_RC_distance(seqs, coder, GF4_coordinate='ATGC'):
         # output
         yield (name1, s1, s2, bio.NA2AA(s1), bio.NA2AA(s2), fracToStr(bio.RC(s1, s2)),
                fracToStr(bio.get_similarity(s1, s2)))
-
-
-# def calc_combination(n, k):
-#     return math.factorial(n) // math.factorial(n - k) // math.factorial(k)
-#
-#
-# def analyze_estimate_code(csv_writer, parameters):
-#     # --- output the header ---
-#     header = (
-#         'name',
-#         'dna sequence',
-#         'n',
-#         'k',
-#         'generator',
-#         'frequency')
-#     csv_writer.writerow(header)
-#
-#     for (n,) in parameters['solve mode']:
-#         k = n * 2 // 3
-#         for (name, x_NA) in parameters['input sequences']:
-#             print()
-#             print(
-#                 'Solve mode: n={0},k={1},seqs={2}:{3}'.format(n, k, name, x_NA))
-#             # STEP 1: collect all unique blocks
-#             print('STEP 1: collect all unique blocks')
-#             U_X_list = []  # U_X_list = {(u,x) in U x X}
-#
-#             u_NA = bio.get_codon12(x_NA)
-#             x = bio.NA2GF(x_NA, table=bio.NA2GF_table)
-#             u = bio.NA2GF(u_NA, table=bio.NA2GF_table)
-#             if verboseWarning and len(x) % n != 0:
-#                 print('[WARNING]omit the tail')
-#                 x = x[:(len(x) // n) * n]
-#                 u = u[:(len(u) // k) * k]
-#             U_X_list.extend(list(zip(
-#                 (tuple(
-#                     u[i:i + k]) for i in range(0, len(u), k)), (tuple(x[i:i + n]) for i in range(
-#                     0, len(x), n)))))
-#             # make a unique U_X_list
-#             U_X_list = sorted(set(U_X_list), key=U_X_list.index)
-#             print('{{(u,x) in UxX}}={{{0}}}'.format(','.join(
-#                 ['({0},{1})'.format(bio.GF2NA(uu), bio.GF2NA(xx)) for (uu, xx) in U_X_list])))
-#             # STEP 2: count frequencies
-#             print()
-#             print('STEP 2: count uniq code frequencies')
-#             X_freq = Counter((xx for (uu, xx) in U_X_list))
-#             U_freq = Counter((uu for (uu, xx) in U_X_list))
-#             print('FREQUENCY OF X={0}'.format(
-#                 ','.join(['({0},{1})'.format(bio.GF2NA(xx), cc) for xx, cc in X_freq.items()])))
-#             print('FREQUENCY OF U={0}'.format(
-#                 ','.join(['({0},{1})'.format(bio.GF2NA(uu), cc) for uu, cc in U_freq.items()])))
-#             # STEP 3: calculation
-#             print()
-#             print('STEP 3: main calculation')
-#             if max(U_freq.values()) > 1:
-#                 num_non_uniq = sum(
-#                     [cc - 1 for cc in U_freq.values() if cc > 1])
-#                 num_uniq = sum([cc for cc in U_freq.values() if cc == 1])
-#                 print(('[ERROR 1]THERE EXIST {0}/{1} NON UNIQUE SILENT MUTATIONS.'
-#                        ' CAN NOT CONSTRUCT A UNIQUE LINEAR CODE').format(
-#                     num_non_uniq, num_non_uniq + num_uniq))
-#             else:
-#                 if len(U_freq.keys()) < k:
-#                     print(('[ERROR 2]NOT ENOUGH UNIQUE SEQUENCES:'
-#                            ' num(U)={0} should be more than k={1}').format(
-#                         len(U_freq.keys()), k))
-#                 else:
-#                     U_X_uniqMap_all = dict(U_X_list)
-#                     # print('U X map={0}'.format(U_X_uniqMap))
-#
-#                     # Aをmxn行列とするとき
-#                     # rank(Ab)>rank(A) => 解はない
-#                     # rank(Ab)=rankA<=n <=> Ax=bが解を持つ
-#                     # rank(Ab)=rankA=n <=> Ax=bがただ１つの解をもつ
-#                     # X = UG
-#                     # x_i = Ug_i <=> b=Ax
-#                     for num_samples in range(len(U_X_uniqMap_all), -1, -1):
-#                         print('samples={0}'.format(num_samples))
-#                         for a_U_X_uniqSet in combinations(U_X_uniqMap_all.items(), num_samples):
-#                             U_X_uniqMap = dict(a_U_X_uniqSet)
-#
-#                             U_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k, list(poly_gf4.flatten(
-#                                                        list(U_X_uniqMap.keys()))))
-#                             U_rank = U_matrix.rank()
-#                             if U_rank < k:
-#                                 print(
-#                                     '[ERROR 3]RANK(U)<k: rank(U)={0},k={1}'.format(U_rank, k))
-#                             else:
-#                                 num_ok_column = n * 2 // 3
-#                                 G = [0, ] * n
-#                                 # for i in range(0,n):
-#                                 # 12,45,78,..は単位行列の成分になっていることは自明。なので計算ははぶく
-#                                 for i in range(2, n, 3):
-#                                     x_i = [x_row[i]
-#                                            for x_row in U_X_uniqMap.values()]
-#                                     U_x_i_matrix = poly_gf4.Matrix(len(U_X_uniqMap), k + 1, list(
-#                                         poly_gf4.flatten(list(zip(U_X_uniqMap.keys(), x_i)))))
-#                                     U_x_i_rank = U_x_i_matrix.rank()
-#                                     if U_rank == U_x_i_rank:
-#                                         num_ok_column += 1
-#                                         G[i] = U_matrix.solve(x_i)
-#                                         # print('there exist just 1 result!')
-#                                     else:
-#                                         G[i] = ['-', ] * k
-#                                         # print(('[ERROR 4]RANK(Ux_i)<RANK(U):'
-#                                         #        ' i={0},rank(Ux_i)={1},rank(U)={2}').format(
-#                                         #     i,U_x_i_rank,U_rank))
-#                                     # print('g_{0}={1}'.format(i,g_i))
-#
-#                                 if num_ok_column == n:
-#                                     print('A UNIQUE GENERATOR EXISTS!')
-#                                     print('samples={0}'.format(num_samples))
-#                                     print('U X set={0}'.format(','.join(['({0},{1})'.format(
-#                                         bio.GF2NA(kk), bio.GF2NA(v))
-#                                         for kk, v in U_X_uniqMap.items()])))
-#                                     print('G={0}'.format(G))
-#                                     sys.exit()
-#                                     # u_set = list(U_X_uniqMap.keys())
-#                                     # x_set = [U_X_uniqMap[u] for u in u_set]
-#                                     # G = poly_gf4.calc_generator_from_codes(x_set, u_set, n, k)
-#
-#                                     # line = []
-#                                     # line.append(name)
-#                                     # line.append(x_NA)
-#                                     # line.append(n)
-#                                     # line.append(k)
-#                                     # line.append(G.toLine())
-#                                     # line.append(1)
-#                                     # csv_writer.writerow(line)
-#                                 else:
-#                                     print('GENERATOR DOES NOT EXIST: {0}/{1} ok.'.format(
-#                                         num_ok_column, n))
-#
-#                                     # TODO: とりあえず方針をきめることが先
-#                                     continue
-#
-#                                     G_freq = defaultdict(int)
-#                                     num_trial = calc_combination(
-#                                         len(U_X_uniqMap.keys()), k)
-#                                     i_trial = 0
-#                                     num_G = 0
-#                                     for u_set in combinations(U_X_uniqMap.keys(), k):
-#                                         i_trial += 1
-#                                         if i_trial % 100 == 0:
-#                                             print('{0}/{1}: unique generators={2}/{3}'.format(
-#                                                 i_trial, num_trial, len(G_freq), num_G))
-#                                         if i_trial == 1000:
-#                                             sys.exit(0)
-#                                         x_set = [U_X_uniqMap[uu] for uu in u_set]
-#                                         try:
-#                                             G = poly_gf4.calc_generator_from_codes(
-#                                                 x_set, u_set, n, k)
-#                                             G_freq[G] += 1
-#                                             num_G += 1
-#                                         except:
-#                                             pass
-#                                         # print('U={0},X={1}:'.format(list(u_set),x_set))
-#                                         # print('G={0}'.format(G))
-#                                     for G, freq in G_freq.items():
-#                                         line = []
-#                                         line.append(name)
-#                                         line.append(x_NA)
-#                                         line.append(n)
-#                                         line.append(k)
-#                                         line.append(G.toLine())
-#                                         line.append(freq)
-#                                         csv_writer.writerow(line)
 
 
 if __name__ == '__main__':

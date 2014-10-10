@@ -19,10 +19,9 @@ before_install:
 install:
     - sudo apt-get install libqt4-dev
     - conda install --yes python=$TRAVIS_PYTHON_VERSION setuptools numpy scipy matplotlib pytest dateutil
-    # Omit pip install PySide
     - pip install --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
     - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
-
+    # Omit pip install PySide
     - sed '/./s/PySide//g' requirements.txt > requirements.txt
     - python setup.py develop
 script: py.test

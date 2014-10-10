@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from genecoder.main import run
+from genecoder.main import main
 import shlex
 import os
 import shutil
@@ -36,7 +36,8 @@ class TestStatMode:
 
     def test_data(self):
         # run
-        assert run(shlex.split('-stat -code bch_n3_1 -o {0} {1}'.format(outdir, absname))) == 0
+        cmd = 'stat --coder bch_n3_1 --gf4 atgc --outdir {0} --input {1}'.format(outdir, absname)
+        assert main(shlex.split(cmd)) == 0
 
         with open(outfile, 'rU') as fin:
             reader = csv.DictReader(fin)

@@ -1,5 +1,7 @@
 # Reference: https://gist.github.com/dan-blanchard/7045057
 language: python
+notifications:
+    email: false
 python:
     - 2.7
     - 3.4
@@ -12,16 +14,25 @@ before_install:
     - ./miniconda.sh -b
     - export PATH=/home/travis/miniconda/bin:$PATH
     - conda update --yes conda
+    - conda create --yes -n condaenv python=$TRAVIS_PYTHON_VERSION
+    - conda install --yes -n condaenv pip
+    - source activate condaenv
     # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
     - sudo rm -rf /dev/shm
     - sudo ln -s /run/shm /dev/shm
 # Install packages
 install:
     - sudo apt-get install libqt4-dev
-    - conda install --yes python=$TRAVIS_PYTHON_VERSION setuptools numpy scipy matplotlib pytest dateutil
+    # Omit installed package
+    - sed '/PySide/d' requirements.txt > requirements.txt
+    - sed '/numpy/d' requirements.txt > requirements.txt
+    - sed '/scipy/d' requirements.txt > requirements.txt
+    - sed '/matplotlib/d' requirements.txt > requirements.txt
+    - sed '/dateutil/d' requirements.txt > requirements.txt
+    - sed '/pytest/d' requirements.txt > requirements.txt
+    - pip install docopt
     - pip install --find-links https://parkin.github.io/python-wheelhouse/ --use-wheel PySide;
-    - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/pyside_postinstall.py -install
-    # Omit pip install PySide
-    - sed '/./s/PySide//g' requirements.txt > requirements.txt
+    - python ~/miniconda/envs/condaenv/bin/pyside_postinstall.py -install
+    - conda install --yes python=$TRAVIS_PYTHON_VERSION numpy scipy matplotlib pytest dateutil
     - python setup.py develop
 script: py.test

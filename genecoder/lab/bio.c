@@ -777,10 +777,6 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 static CYTHON_INLINE void __Pyx_ExceptionSave(PyObject **type, PyObject **value, PyObject **tb);
 static void __Pyx_ExceptionReset(PyObject *type, PyObject *value, PyObject *tb);
 
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
-
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -900,7 +896,6 @@ static char __pyx_k_TCAG[] = "TCAG";
 static char __pyx_k_args[] = "args";
 static char __pyx_k_keys[] = "keys";
 static char __pyx_k_main[] = "__main__";
-static char __pyx_k_name[] = "__name__";
 static char __pyx_k_send[] = "send";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_GF2NA[] = "GF2NA";
@@ -919,12 +914,9 @@ static char __pyx_k_values[] = "values";
 static char __pyx_k_a_block[] = "a_block";
 static char __pyx_k_a_codon[] = "a_codon";
 static char __pyx_k_capital[] = "capital";
-static char __pyx_k_doctest[] = "doctest";
 static char __pyx_k_genexpr[] = "genexpr";
 static char __pyx_k_product[] = "product";
 static char __pyx_k_split_n[] = "split_n";
-static char __pyx_k_testmod[] = "testmod";
-static char __pyx_k_verbose[] = "verbose";
 static char __pyx_k_Fraction[] = "Fraction";
 static char __pyx_k_fractions[] = "fractions";
 static char __pyx_k_itertools[] = "itertools";
@@ -950,13 +942,13 @@ static char __pyx_k_NA2GF_locals_lambda[] = "NA2GF.<locals>.<lambda>";
 static char __pyx_k_codon_sort_line_114[] = "codon_sort (line 114)";
 static char __pyx_k_get_codon12_line_57[] = "get_codon12 (line 57)";
 static char __pyx_k_get_similarity_locals_lambda[] = "get_similarity.<locals>.<lambda>";
-static char __pyx_k_insert_a_parity_strings_to_3rd[] = " insert a parity strings to 3rd position.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'AAAATCGGGGCT'\n            >>> bio.codon_sort(s, n=6, k=4)\n            'AATAACGGCGGT'\n\n    ";
-static char __pyx_k_Users_keru_Dropbox_project_gene[] = "/Users/keru/Dropbox/project/genecoder/genecoder/lab/bio.pyx";
-static char __pyx_k_a_generator_to_split_the_dat_wi[] = " a generator to split the dat with length 1/n.\n\n    example:\n            >>> from lab import bio\n            >>> list(bio.split_n('atgcgcatg', 3))\n            ['atg', 'cgc', 'atg']\n\n            >>> list(bio.split_n([1,2,3,4,5,6], 3))\n            [[1, 2, 3], [4, 5, 6]]\n\n    ";
-static char __pyx_k_convert_a_polynomial_to_a_seque[] = " convert a polynomial to a sequence.\n\n    example:\n            >>> from lab import bio\n            >>> a_x = [0, 1, 2, 3, 2, 3, 0, 1, 2]\n            >>> bio.GF2NA(a_x)\n            'ATGCGCATG'\n            >>> bio.GF2NA(a_x, capital=False)\n            'atgcgcatg'\n\n    ";
-static char __pyx_k_convert_a_sequence_to_a_polynom[] = " convert a sequence to a polynomial.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.NA2GF(s)\n            [0, 1, 2, 3, 2, 3, 0, 1, 2]\n\n    ";
-static char __pyx_k_from_lab_import_bio_bio_NA2AA_a[] = "\n\n            >>> from lab import bio\n            >>> bio.NA2AA('atgatg')\n            'MM'\n\n    ";
-static char __pyx_k_get_a_substring_that_contains_o[] = " get a substring that contains only specific positions.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.get_codon12(s)\n            'atcgat'\n\n    ";
+static char __pyx_k_insert_a_parity_strings_to_3rd[] = " insert a parity strings to 3rd position.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'AAAATCGGGGCT'\n            >>> str(bio.codon_sort(s, n=6, k=4))\n            'AATAACGGCGGT'\n\n    ";
+static char __pyx_k_Users_keru_project_git_genecode[] = "/Users/keru/project-git/genecoder/genecoder/lab/bio.pyx";
+static char __pyx_k_a_generator_to_split_the_dat_wi[] = " a generator to split the dat with length 1/n.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> list(bio.split_n('atgcgcatg', 3))\n            ['atg', 'cgc', 'atg']\n\n            >>> list(bio.split_n([1,2,3,4,5,6], 3))\n            [[1, 2, 3], [4, 5, 6]]\n\n    ";
+static char __pyx_k_convert_a_polynomial_to_a_seque[] = " convert a polynomial to a sequence.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> a_x = [0, 1, 2, 3, 2, 3, 0, 1, 2]\n            >>> str(bio.GF2NA(a_x))\n            'ATGCGCATG'\n            >>> str(bio.GF2NA(a_x, capital=False))\n            'atgcgcatg'\n\n    ";
+static char __pyx_k_convert_a_sequence_to_a_polynom[] = " convert a sequence to a polynomial.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.NA2GF(s)\n            [0, 1, 2, 3, 2, 3, 0, 1, 2]\n\n    ";
+static char __pyx_k_from_genecoder_lab_import_bio_s[] = "\n\n            >>> from genecoder.lab import bio\n            >>> str(bio.NA2AA('atgatg'))\n            'MM'\n\n    ";
+static char __pyx_k_get_a_substring_that_contains_o[] = " get a substring that contains only specific positions.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'atgcgcatg'\n            >>> str(bio.get_codon12(s))\n            'atcgat'\n\n    ";
 static char __pyx_k_FFLLSSSSYYXXCCXWLLLLPPPPHHQQRRRR[] = "FFLLSSSSYYXXCCXWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG";
 static PyObject *__pyx_n_u_ATGC;
 static PyObject *__pyx_n_u_FFLLSSSSYYXXCCXWLLLLPPPPHHQQRRRR;
@@ -974,7 +966,7 @@ static PyObject *__pyx_n_s_NA2GF_locals_lambda;
 static PyObject *__pyx_n_s_NA2GF_table;
 static PyObject *__pyx_n_s_RC;
 static PyObject *__pyx_n_u_TCAG;
-static PyObject *__pyx_kp_s_Users_keru_Dropbox_project_gene;
+static PyObject *__pyx_kp_s_Users_keru_project_git_genecode;
 static PyObject *__pyx_kp_u__2;
 static PyObject *__pyx_n_s_a;
 static PyObject *__pyx_n_s_a_block;
@@ -995,9 +987,8 @@ static PyObject *__pyx_kp_u_convert_a_polynomial_to_a_seque;
 static PyObject *__pyx_kp_u_convert_a_sequence_to_a_polynom;
 static PyObject *__pyx_n_s_count;
 static PyObject *__pyx_n_s_dat;
-static PyObject *__pyx_n_s_doctest;
 static PyObject *__pyx_n_s_fractions;
-static PyObject *__pyx_kp_u_from_lab_import_bio_bio_NA2AA_a;
+static PyObject *__pyx_kp_u_from_genecoder_lab_import_bio_s;
 static PyObject *__pyx_n_s_future_builtins;
 static PyObject *__pyx_n_s_genecoder_lab_bio;
 static PyObject *__pyx_n_s_genexpr;
@@ -1014,10 +1005,8 @@ static PyObject *__pyx_n_s_k;
 static PyObject *__pyx_n_s_keys;
 static PyObject *__pyx_n_s_lower;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_u_main;
 static PyObject *__pyx_n_s_map;
 static PyObject *__pyx_n_s_n;
-static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_p_x;
 static PyObject *__pyx_n_s_product;
 static PyObject *__pyx_n_s_range;
@@ -1032,11 +1021,9 @@ static PyObject *__pyx_n_s_split_n;
 static PyObject *__pyx_kp_u_split_n_line_30;
 static PyObject *__pyx_n_s_table;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_n_s_testmod;
 static PyObject *__pyx_n_s_throw;
 static PyObject *__pyx_n_s_upper;
 static PyObject *__pyx_n_s_values;
-static PyObject *__pyx_n_s_verbose;
 static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_y;
 static PyObject *__pyx_n_s_zip;
@@ -1518,7 +1505,7 @@ static PyObject *__pyx_gb_9genecoder_3lab_3bio_4generator(__pyx_GeneratorObject 
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_3split_n(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_2split_n[] = " a generator to split the dat with length 1/n.\n\n    example:\n            >>> from lab import bio\n            >>> list(bio.split_n('atgcgcatg', 3))\n            ['atg', 'cgc', 'atg']\n\n            >>> list(bio.split_n([1,2,3,4,5,6], 3))\n            [[1, 2, 3], [4, 5, 6]]\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_2split_n[] = " a generator to split the dat with length 1/n.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> list(bio.split_n('atgcgcatg', 3))\n            ['atg', 'cgc', 'atg']\n\n            >>> list(bio.split_n([1,2,3,4,5,6], 3))\n            [[1, 2, 3], [4, 5, 6]]\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_3split_n = {"split_n", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_3split_n, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_3bio_2split_n};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_3split_n(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_dat = 0;
@@ -1802,7 +1789,7 @@ static PyObject *__pyx_gb_9genecoder_3lab_3bio_4generator(__pyx_GeneratorObject 
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_6get_codon12(PyObject *__pyx_self, PyObject *__pyx_v_s); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_5get_codon12[] = " get a substring that contains only specific positions.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.get_codon12(s)\n            'atcgat'\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_5get_codon12[] = " get a substring that contains only specific positions.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'atgcgcatg'\n            >>> str(bio.get_codon12(s))\n            'atcgat'\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_6get_codon12 = {"get_codon12", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_6get_codon12, METH_O, __pyx_doc_9genecoder_3lab_3bio_5get_codon12};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_6get_codon12(PyObject *__pyx_self, PyObject *__pyx_v_s) {
   PyObject *__pyx_r = 0;
@@ -2040,7 +2027,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_5get_codon12(CYTHON_UNUSED PyObje
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_8NA2GF(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_7NA2GF[] = " convert a sequence to a polynomial.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.NA2GF(s)\n            [0, 1, 2, 3, 2, 3, 0, 1, 2]\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_7NA2GF[] = " convert a sequence to a polynomial.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'atgcgcatg'\n            >>> bio.NA2GF(s)\n            [0, 1, 2, 3, 2, 3, 0, 1, 2]\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_8NA2GF = {"NA2GF", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_8NA2GF, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_3bio_7NA2GF};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_8NA2GF(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_s = 0;
@@ -2280,7 +2267,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_7NA2GF(CYTHON_UNUSED PyObject *__
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_10GF2NA(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_9GF2NA[] = " convert a polynomial to a sequence.\n\n    example:\n            >>> from lab import bio\n            >>> a_x = [0, 1, 2, 3, 2, 3, 0, 1, 2]\n            >>> bio.GF2NA(a_x)\n            'ATGCGCATG'\n            >>> bio.GF2NA(a_x, capital=False)\n            'atgcgcatg'\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_9GF2NA[] = " convert a polynomial to a sequence.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> a_x = [0, 1, 2, 3, 2, 3, 0, 1, 2]\n            >>> str(bio.GF2NA(a_x))\n            'ATGCGCATG'\n            >>> str(bio.GF2NA(a_x, capital=False))\n            'atgcgcatg'\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_10GF2NA = {"GF2NA", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_10GF2NA, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_3bio_9GF2NA};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_10GF2NA(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_p_x = 0;
@@ -2586,7 +2573,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_9GF2NA(CYTHON_UNUSED PyObject *__
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_12NA2AA(PyObject *__pyx_self, PyObject *__pyx_v_s); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_11NA2AA[] = "\n\n            >>> from lab import bio\n            >>> bio.NA2AA('atgatg')\n            'MM'\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_11NA2AA[] = "\n\n            >>> from genecoder.lab import bio\n            >>> str(bio.NA2AA('atgatg'))\n            'MM'\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_12NA2AA = {"NA2AA", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_12NA2AA, METH_O, __pyx_doc_9genecoder_3lab_3bio_11NA2AA};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_12NA2AA(PyObject *__pyx_self, PyObject *__pyx_v_s) {
   PyObject *__pyx_r = 0;
@@ -2636,7 +2623,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_11NA2AA(CYTHON_UNUSED PyObject *_
  *     res = []
  *     for a_codon in split_n(s, 3):             # <<<<<<<<<<<<<<
  *         res.append(codon_table[a_codon.upper()])
- *     return ''.join(res)
+ *     return str(''.join(res))
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_split_n); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -2712,7 +2699,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_11NA2AA(CYTHON_UNUSED PyObject *_
  *     res = []
  *     for a_codon in split_n(s, 3):
  *         res.append(codon_table[a_codon.upper()])             # <<<<<<<<<<<<<<
- *     return ''.join(res)
+ *     return str(''.join(res))
  * 
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_codon_table); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2749,7 +2736,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_11NA2AA(CYTHON_UNUSED PyObject *_
  *     res = []
  *     for a_codon in split_n(s, 3):             # <<<<<<<<<<<<<<
  *         res.append(codon_table[a_codon.upper()])
- *     return ''.join(res)
+ *     return str(''.join(res))
  */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2757,13 +2744,21 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_11NA2AA(CYTHON_UNUSED PyObject *_
   /* "genecoder/lab/bio.pyx":111
  *     for a_codon in split_n(s, 3):
  *         res.append(codon_table[a_codon.upper()])
- *     return ''.join(res)             # <<<<<<<<<<<<<<
+ *     return str(''.join(res))             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = PyUnicode_Join(__pyx_kp_u__2, __pyx_v_res); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
@@ -2804,7 +2799,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_11NA2AA(CYTHON_UNUSED PyObject *_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_14codon_sort(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_3bio_13codon_sort[] = " insert a parity strings to 3rd position.\n\n    example:\n            >>> from lab import bio\n            >>> s = 'AAAATCGGGGCT'\n            >>> bio.codon_sort(s, n=6, k=4)\n            'AATAACGGCGGT'\n\n    ";
+static char __pyx_doc_9genecoder_3lab_3bio_13codon_sort[] = " insert a parity strings to 3rd position.\n\n    example:\n            >>> from genecoder.lab import bio\n            >>> s = 'AAAATCGGGGCT'\n            >>> str(bio.codon_sort(s, n=6, k=4))\n            'AATAACGGCGGT'\n\n    ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_3bio_14codon_sort = {"codon_sort", (PyCFunction)__pyx_pw_9genecoder_3lab_3bio_14codon_sort, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_3bio_13codon_sort};
 static PyObject *__pyx_pw_9genecoder_3lab_3bio_14codon_sort(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_s = 0;
@@ -3050,7 +3045,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_13codon_sort(CYTHON_UNUSED PyObje
  *         a_block_shuffled = ''.join(
  *             [a + b + c for a, b, c in zip(a_block_info[0::2], a_block_info[1::2], a_block_parity)])             # <<<<<<<<<<<<<<
  *         res.append(a_block_shuffled)
- *     return ''.join(res)
+ *     return str(''.join(res))
  */
     __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -3218,7 +3213,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_13codon_sort(CYTHON_UNUSED PyObje
  *         a_block_shuffled = ''.join(
  *             [a + b + c for a, b, c in zip(a_block_info[0::2], a_block_info[1::2], a_block_parity)])
  *         res.append(a_block_shuffled)             # <<<<<<<<<<<<<<
- *     return ''.join(res)
+ *     return str(''.join(res))
  * 
  */
     __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_res, __pyx_v_a_block_shuffled); if (unlikely(__pyx_t_15 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3236,13 +3231,21 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_13codon_sort(CYTHON_UNUSED PyObje
   /* "genecoder/lab/bio.pyx":133
  *             [a + b + c for a, b, c in zip(a_block_info[0::2], a_block_info[1::2], a_block_parity)])
  *         res.append(a_block_shuffled)
- *     return ''.join(res)             # <<<<<<<<<<<<<<
+ *     return str(''.join(res))             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = PyUnicode_Join(__pyx_kp_u__2, __pyx_v_res); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
@@ -3627,7 +3630,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_15get_similarity(CYTHON_UNUSED Py
  * 
  * def RC(s1, s2):             # <<<<<<<<<<<<<<
  *     return get_similarity(NA2AA(s1), NA2AA(s2))
- * 
  */
 
 /* Python wrapper */
@@ -3714,8 +3716,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_17RC(CYTHON_UNUSED PyObject *__py
  * 
  * def RC(s1, s2):
  *     return get_similarity(NA2AA(s1), NA2AA(s2))             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_similarity); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3810,7 +3810,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_3bio_17RC(CYTHON_UNUSED PyObject *__py
  * 
  * def RC(s1, s2):             # <<<<<<<<<<<<<<
  *     return get_similarity(NA2AA(s1), NA2AA(s2))
- * 
  */
 
   /* function exit code */
@@ -4310,7 +4309,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_NA2GF_table, __pyx_k_NA2GF_table, sizeof(__pyx_k_NA2GF_table), 0, 0, 1, 1},
   {&__pyx_n_s_RC, __pyx_k_RC, sizeof(__pyx_k_RC), 0, 0, 1, 1},
   {&__pyx_n_u_TCAG, __pyx_k_TCAG, sizeof(__pyx_k_TCAG), 0, 1, 0, 1},
-  {&__pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_k_Users_keru_Dropbox_project_gene, sizeof(__pyx_k_Users_keru_Dropbox_project_gene), 0, 0, 1, 0},
+  {&__pyx_kp_s_Users_keru_project_git_genecode, __pyx_k_Users_keru_project_git_genecode, sizeof(__pyx_k_Users_keru_project_git_genecode), 0, 0, 1, 0},
   {&__pyx_kp_u__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
   {&__pyx_n_s_a, __pyx_k_a, sizeof(__pyx_k_a), 0, 0, 1, 1},
   {&__pyx_n_s_a_block, __pyx_k_a_block, sizeof(__pyx_k_a_block), 0, 0, 1, 1},
@@ -4331,9 +4330,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_convert_a_sequence_to_a_polynom, __pyx_k_convert_a_sequence_to_a_polynom, sizeof(__pyx_k_convert_a_sequence_to_a_polynom), 0, 1, 0, 0},
   {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
   {&__pyx_n_s_dat, __pyx_k_dat, sizeof(__pyx_k_dat), 0, 0, 1, 1},
-  {&__pyx_n_s_doctest, __pyx_k_doctest, sizeof(__pyx_k_doctest), 0, 0, 1, 1},
   {&__pyx_n_s_fractions, __pyx_k_fractions, sizeof(__pyx_k_fractions), 0, 0, 1, 1},
-  {&__pyx_kp_u_from_lab_import_bio_bio_NA2AA_a, __pyx_k_from_lab_import_bio_bio_NA2AA_a, sizeof(__pyx_k_from_lab_import_bio_bio_NA2AA_a), 0, 1, 0, 0},
+  {&__pyx_kp_u_from_genecoder_lab_import_bio_s, __pyx_k_from_genecoder_lab_import_bio_s, sizeof(__pyx_k_from_genecoder_lab_import_bio_s), 0, 1, 0, 0},
   {&__pyx_n_s_future_builtins, __pyx_k_future_builtins, sizeof(__pyx_k_future_builtins), 0, 0, 1, 1},
   {&__pyx_n_s_genecoder_lab_bio, __pyx_k_genecoder_lab_bio, sizeof(__pyx_k_genecoder_lab_bio), 0, 0, 1, 1},
   {&__pyx_n_s_genexpr, __pyx_k_genexpr, sizeof(__pyx_k_genexpr), 0, 0, 1, 1},
@@ -4350,10 +4348,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_keys, __pyx_k_keys, sizeof(__pyx_k_keys), 0, 0, 1, 1},
   {&__pyx_n_s_lower, __pyx_k_lower, sizeof(__pyx_k_lower), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_u_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 1, 0, 1},
   {&__pyx_n_s_map, __pyx_k_map, sizeof(__pyx_k_map), 0, 0, 1, 1},
   {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
-  {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_p_x, __pyx_k_p_x, sizeof(__pyx_k_p_x), 0, 0, 1, 1},
   {&__pyx_n_s_product, __pyx_k_product, sizeof(__pyx_k_product), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
@@ -4368,11 +4364,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_split_n_line_30, __pyx_k_split_n_line_30, sizeof(__pyx_k_split_n_line_30), 0, 1, 0, 0},
   {&__pyx_n_s_table, __pyx_k_table, sizeof(__pyx_k_table), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_n_s_testmod, __pyx_k_testmod, sizeof(__pyx_k_testmod), 0, 0, 1, 1},
   {&__pyx_n_s_throw, __pyx_k_throw, sizeof(__pyx_k_throw), 0, 0, 1, 1},
   {&__pyx_n_s_upper, __pyx_k_upper, sizeof(__pyx_k_upper), 0, 0, 1, 1},
   {&__pyx_n_s_values, __pyx_k_values, sizeof(__pyx_k_values), 0, 0, 1, 1},
-  {&__pyx_n_s_verbose, __pyx_k_verbose, sizeof(__pyx_k_verbose), 0, 0, 1, 1},
   {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
   {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
   {&__pyx_n_s_zip, __pyx_k_zip, sizeof(__pyx_k_zip), 0, 0, 1, 1},
@@ -4420,7 +4414,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         a_block_shuffled = ''.join(
  *             [a + b + c for a, b, c in zip(a_block_info[0::2], a_block_info[1::2], a_block_parity)])             # <<<<<<<<<<<<<<
  *         res.append(a_block_shuffled)
- *     return ''.join(res)
+ *     return str(''.join(res))
  */
   __pyx_slice__7 = PySlice_New(__pyx_int_0, Py_None, __pyx_int_2); if (unlikely(!__pyx_slice__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__7);
@@ -4450,7 +4444,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_s_s); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_set_elements, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_set_elements, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":27
  * 
@@ -4473,7 +4467,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__13 = PyTuple_Pack(3, __pyx_n_s_dat, __pyx_n_s_n, __pyx_n_s_i); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_split_n, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_split_n, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":57
  * 
@@ -4485,7 +4479,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__15 = PyTuple_Pack(3, __pyx_n_s_s, __pyx_n_s_a, __pyx_n_s_b); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_get_codon12, 57, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_get_codon12, 57, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":71
  * 
@@ -4497,7 +4491,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__17 = PyTuple_Pack(2, __pyx_n_s_s, __pyx_n_s_table); if (unlikely(!__pyx_tuple__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_NA2GF, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_NA2GF, 71, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":84
  * 
@@ -4509,7 +4503,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__19 = PyTuple_Pack(4, __pyx_n_s_p_x, __pyx_n_s_capital, __pyx_n_s_table, __pyx_n_s_s); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_GF2NA, 84, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_GF2NA, 84, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":100
  * 
@@ -4521,7 +4515,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__21 = PyTuple_Pack(3, __pyx_n_s_s, __pyx_n_s_res, __pyx_n_s_a_codon); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_NA2AA, 100, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_NA2AA, 100, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":114
  * 
@@ -4533,7 +4527,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__23 = PyTuple_Pack(11, __pyx_n_s_s, __pyx_n_s_n, __pyx_n_s_k, __pyx_n_s_res, __pyx_n_s_a_block, __pyx_n_s_a_block_info, __pyx_n_s_a_block_parity, __pyx_n_s_a_block_shuffled, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_c); if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_codon_sort, 114, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_codon_sort, 114, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":136
  * 
@@ -4545,19 +4539,18 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__25 = PyTuple_Pack(3, __pyx_n_s_s1, __pyx_n_s_s2, __pyx_n_s_c); if (unlikely(!__pyx_tuple__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_get_similarity, 136, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_get_similarity, 136, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "genecoder/lab/bio.pyx":146
  * 
  * 
  * def RC(s1, s2):             # <<<<<<<<<<<<<<
  *     return get_similarity(NA2AA(s1), NA2AA(s2))
- * 
  */
   __pyx_tuple__27 = PyTuple_Pack(2, __pyx_n_s_s1, __pyx_n_s_s2); if (unlikely(!__pyx_tuple__27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_Dropbox_project_gene, __pyx_n_s_RC, 146, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_RC, 146, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4594,7 +4587,6 @@ PyMODINIT_FUNC PyInit_bio(void)
   PyObject *__pyx_t_8 = NULL;
   Py_ssize_t __pyx_t_9;
   PyObject *__pyx_t_10 = NULL;
-  int __pyx_t_11;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4991,74 +4983,27 @@ PyMODINIT_FUNC PyInit_bio(void)
  * 
  * def RC(s1, s2):             # <<<<<<<<<<<<<<
  *     return get_similarity(NA2AA(s1), NA2AA(s2))
- * 
  */
   __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_9genecoder_3lab_3bio_18RC, NULL, __pyx_n_s_genecoder_lab_bio); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_RC, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "genecoder/lab/bio.pyx":150
- * 
- * 
- * if __name__ == '__main__':             # <<<<<<<<<<<<<<
- *     import doctest
- *     doctest.testmod(verbose=False)
- */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_name); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_11 = (__Pyx_PyUnicode_Equals(__pyx_t_5, __pyx_n_u_main, Py_EQ)); if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__pyx_t_11) {
-
-    /* "genecoder/lab/bio.pyx":151
- * 
- * if __name__ == '__main__':
- *     import doctest             # <<<<<<<<<<<<<<
- *     doctest.testmod(verbose=False)
- */
-    __pyx_t_5 = __Pyx_Import(__pyx_n_s_doctest, 0, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_doctest, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-
-    /* "genecoder/lab/bio.pyx":152
- * if __name__ == '__main__':
- *     import doctest
- *     doctest.testmod(verbose=False)             # <<<<<<<<<<<<<<
- */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_doctest); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_testmod); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_verbose, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    goto __pyx_L10;
-  }
-  __pyx_L10:;
-
   /* "genecoder/lab/bio.pyx":1
  * # cython: profile=True             # <<<<<<<<<<<<<<
  * from __future__ import absolute_import, division, print_function, unicode_literals
  * try:
  */
-  __pyx_t_10 = PyDict_New(); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_10);
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_split_n_line_30, __pyx_kp_u_a_generator_to_split_the_dat_wi) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_get_codon12_line_57, __pyx_kp_u_get_a_substring_that_contains_o) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_NA2GF_line_71, __pyx_kp_u_convert_a_sequence_to_a_polynom) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_GF2NA_line_84, __pyx_kp_u_convert_a_polynomial_to_a_seque) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_NA2AA_line_100, __pyx_kp_u_from_lab_import_bio_bio_NA2AA_a) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_kp_u_codon_sort_line_114, __pyx_kp_u_insert_a_parity_strings_to_3rd) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_10) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_split_n_line_30, __pyx_kp_u_a_generator_to_split_the_dat_wi) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_get_codon12_line_57, __pyx_kp_u_get_a_substring_that_contains_o) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_NA2GF_line_71, __pyx_kp_u_convert_a_sequence_to_a_polynom) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_GF2NA_line_84, __pyx_kp_u_convert_a_polynomial_to_a_seque) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_NA2AA_line_100, __pyx_kp_u_from_genecoder_lab_import_bio_s) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_codon_sort_line_114, __pyx_kp_u_insert_a_parity_strings_to_3rd) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -6234,126 +6179,6 @@ static void __Pyx_ExceptionReset(PyObject *type, PyObject *value, PyObject *tb) 
     Py_XDECREF(tmp_tb);
 #else
     PyErr_SetExcInfo(type, value, tb);
-#endif
-}
-
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-    if (s1 == s2) {
-        return (equals == Py_EQ);
-    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
-        const char *ps1, *ps2;
-        Py_ssize_t length = PyBytes_GET_SIZE(s1);
-        if (length != PyBytes_GET_SIZE(s2))
-            return (equals == Py_NE);
-        ps1 = PyBytes_AS_STRING(s1);
-        ps2 = PyBytes_AS_STRING(s2);
-        if (ps1[0] != ps2[0]) {
-            return (equals == Py_NE);
-        } else if (length == 1) {
-            return (equals == Py_EQ);
-        } else {
-            int result = memcmp(ps1, ps2, (size_t)length);
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
-        return (equals == Py_NE);
-    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
-        return (equals == Py_NE);
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
-    }
-#endif
-}
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-#if PY_MAJOR_VERSION < 3
-    PyObject* owned_ref = NULL;
-#endif
-    int s1_is_unicode, s2_is_unicode;
-    if (s1 == s2) {
-        goto return_eq;
-    }
-    s1_is_unicode = PyUnicode_CheckExact(s1);
-    s2_is_unicode = PyUnicode_CheckExact(s2);
-#if PY_MAJOR_VERSION < 3
-    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
-        owned_ref = PyUnicode_FromObject(s2);
-        if (unlikely(!owned_ref))
-            return -1;
-        s2 = owned_ref;
-        s2_is_unicode = 1;
-    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
-        owned_ref = PyUnicode_FromObject(s1);
-        if (unlikely(!owned_ref))
-            return -1;
-        s1 = owned_ref;
-        s1_is_unicode = 1;
-    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
-        return __Pyx_PyBytes_Equals(s1, s2, equals);
-    }
-#endif
-    if (s1_is_unicode & s2_is_unicode) {
-        Py_ssize_t length;
-        int kind;
-        void *data1, *data2;
-        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
-            return -1;
-        length = __Pyx_PyUnicode_GET_LENGTH(s1);
-        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
-            goto return_ne;
-        }
-        kind = __Pyx_PyUnicode_KIND(s1);
-        if (kind != __Pyx_PyUnicode_KIND(s2)) {
-            goto return_ne;
-        }
-        data1 = __Pyx_PyUnicode_DATA(s1);
-        data2 = __Pyx_PyUnicode_DATA(s2);
-        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
-            goto return_ne;
-        } else if (length == 1) {
-            goto return_eq;
-        } else {
-            int result = memcmp(data1, data2, (size_t)(length * kind));
-            #if PY_MAJOR_VERSION < 3
-            Py_XDECREF(owned_ref);
-            #endif
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & s2_is_unicode) {
-        goto return_ne;
-    } else if ((s2 == Py_None) & s1_is_unicode) {
-        goto return_ne;
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
-    }
-return_eq:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_EQ);
-return_ne:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_NE);
 #endif
 }
 

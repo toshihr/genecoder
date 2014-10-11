@@ -113,7 +113,7 @@ def km(time_list, event_list, tag_list=None):
     http://aoki2.si.gunma-u.ac.jp/R/km-surv.html
     http://aoki2.si.gunma-u.ac.jp/lecture/Survival/k-m.html
 
-    >>> from lab.stat import *
+    >>> from genecoder.lab.stat import *
     >>> g = np.array([0,0,1,1,0,0,1,1,0,1,1,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,1,0,0,0])
     >>> e = np.array([1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,1,0,1,0,0,1,0,1,0,0,0])
     >>> t = np.array([2,20,5,1,3,17,2,3,15,14,12,13,11,11,10,8,8,3,7,3,6,2,5,4,2,3,1,3,2,1])
@@ -122,7 +122,8 @@ def km(time_list, event_list, tag_list=None):
     >>> data1 = km(t[g_a],e[g_a])
     >>> data2 = km(t[g_b],e[g_b])
     >>> for a_line in zip(*data1):
-    ...     print( ','.join(list(map(lambda x: '{0:>6.3}'.format(x), a_line))) )
+    ...     print( ','.join(list(map(lambda x: '{0:>6.3}'.format(x) if isinstance(x, float) else
+    ...  '{0:>6}'.format(x), a_line))) )
          1,     1,   1.0,   1.0,   nan
          2,     0, 0.933, 0.933,0.0622
          2,     0, 0.929, 0.867,0.0847
@@ -198,7 +199,7 @@ def logrank(group_list, event_list, time_list, method='SAS'):
     return:
             a tuple of X-squared,p-value,method='SAS' or 'Tominaga',table
 
-    >>> from lab.stat import *
+    >>> from genecoder.lab.stat import *
     >>> g = [0,0,1,1,0,0,1,1,0,1,1,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,1,0,0,0]
     >>> e = [1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,1,0,1,0,0,1,0,1,0,0,0]
     >>> t = [2,20,5,1,3,17,2,3,15,14,12,13,11,11,10,8,8,3,7,3,6,2,5,4,2,3,1,3,2,1]
@@ -313,7 +314,7 @@ def gen_wilcox(group_list, event_list, time_list):
     return:
             a tuple of W,var(W),z-value,p-value
 
-    >>> from lab.stat import *
+    >>> from genecoder.lab.stat import *
     >>> g = [0,0,1,1,0,0,1,1,0,1,1,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,1,0,0,0]
     >>> e = [1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,1,0,1,0,0,1,0,1,0,0,0]
     >>> t = [2,20,5,1,3,17,2,3,15,14,12,13,11,11,10,8,8,3,7,3,6,2,5,4,2,3,1,3,2,1]
@@ -374,14 +375,3 @@ def gen_wilcox_numpy(data):
         Z = np.nan
         P = np.nan
     return (W, W_var, Z, P)
-
-
-def _test():
-    import doctest
-    return doctest.testmod(verbose=False)
-
-if __name__ == '__main__':
-    # NOTE: ここはcythonでは実行されることはないと思われる. __main__として実行するやり方がなさそうなため.
-    # NOTE: テストはルートフォルダ内で以下を実行することにより可能. doctest用ドキュメントはpyxファイルを参照する. 実際のテスト対象コードはバイナリモジュール.
-    # NOTE: python -m doctest -v lab\stat.pyx
-    _test()

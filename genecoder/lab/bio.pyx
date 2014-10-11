@@ -31,7 +31,7 @@ def split_n(dat, n):
     ''' a generator to split the dat with length 1/n.
 
     example:
-            >>> from lab import bio
+            >>> from genecoder.lab import bio
             >>> list(bio.split_n('atgcgcatg', 3))
             ['atg', 'cgc', 'atg']
 
@@ -58,9 +58,9 @@ def get_codon12(s):
     ''' get a substring that contains only specific positions.
 
     example:
-            >>> from lab import bio
+            >>> from genecoder.lab import bio
             >>> s = 'atgcgcatg'
-            >>> bio.get_codon12(s)
+            >>> str(bio.get_codon12(s))
             'atcgat'
 
     '''
@@ -72,7 +72,7 @@ def NA2GF(s, table=NA2GF_table):
     ''' convert a sequence to a polynomial.
 
     example:
-            >>> from lab import bio
+            >>> from genecoder.lab import bio
             >>> s = 'atgcgcatg'
             >>> bio.NA2GF(s)
             [0, 1, 2, 3, 2, 3, 0, 1, 2]
@@ -85,11 +85,11 @@ def GF2NA(p_x, capital=True, table=GF2NA_table):
     ''' convert a polynomial to a sequence.
 
     example:
-            >>> from lab import bio
+            >>> from genecoder.lab import bio
             >>> a_x = [0, 1, 2, 3, 2, 3, 0, 1, 2]
-            >>> bio.GF2NA(a_x)
+            >>> str(bio.GF2NA(a_x))
             'ATGCGCATG'
-            >>> bio.GF2NA(a_x, capital=False)
+            >>> str(bio.GF2NA(a_x, capital=False))
             'atgcgcatg'
 
     '''
@@ -100,24 +100,24 @@ def GF2NA(p_x, capital=True, table=GF2NA_table):
 def NA2AA(s):
     '''
 
-            >>> from lab import bio
-            >>> bio.NA2AA('atgatg')
+            >>> from genecoder.lab import bio
+            >>> str(bio.NA2AA('atgatg'))
             'MM'
 
     '''
     res = []
     for a_codon in split_n(s, 3):
         res.append(codon_table[a_codon.upper()])
-    return ''.join(res)
+    return str(''.join(res))
 
 
 def codon_sort(s, n, k):
     ''' insert a parity strings to 3rd position.
 
     example:
-            >>> from lab import bio
+            >>> from genecoder.lab import bio
             >>> s = 'AAAATCGGGGCT'
-            >>> bio.codon_sort(s, n=6, k=4)
+            >>> str(bio.codon_sort(s, n=6, k=4))
             'AATAACGGCGGT'
 
     '''
@@ -130,7 +130,7 @@ def codon_sort(s, n, k):
         a_block_shuffled = ''.join(
             [a + b + c for a, b, c in zip(a_block_info[0::2], a_block_info[1::2], a_block_parity)])
         res.append(a_block_shuffled)
-    return ''.join(res)
+    return str(''.join(res))
 
 
 def get_similarity(s1, s2):
@@ -145,8 +145,3 @@ def get_similarity(s1, s2):
 
 def RC(s1, s2):
     return get_similarity(NA2AA(s1), NA2AA(s2))
-
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod(verbose=False)

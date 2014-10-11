@@ -778,12 +778,6 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
-#include <string.h>
-
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
-
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -851,7 +845,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_18__defaults__(CYTHON_
 static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_10mod(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a_x, PyObject *__pyx_v_b_x, PyObject *__pyx_v_field); /* proto */
 static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_20__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_12plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a_x, PyObject *__pyx_v_b_x, PyObject *__pyx_v_field); /* proto */
-static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4__test(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static char __pyx_k_0[] = "0";
 static char __pyx_k_1[] = "1";
 static char __pyx_k_a[] = "a";
@@ -884,10 +877,9 @@ static char __pyx_k_Poly[] = "Poly";
 static char __pyx_k_init[] = "__init__";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_mb_x[] = "mb_x";
-static char __pyx_k_name[] = "__name__";
 static char __pyx_k_plus[] = "plus";
 static char __pyx_k_self[] = "self";
-static char __pyx_k_test[] = "_test";
+static char __pyx_k_test[] = "__test__";
 static char __pyx_k_0_x_1[] = "{0}x^{1}";
 static char __pyx_k_d_max[] = "d_max";
 static char __pyx_k_field[] = "field";
@@ -902,15 +894,11 @@ static char __pyx_k_import[] = "__import__";
 static char __pyx_k_module[] = "__module__";
 static char __pyx_k_object[] = "object";
 static char __pyx_k_repeat[] = "repeat";
-static char __pyx_k_test_2[] = "__test__";
 static char __pyx_k_ABCMeta[] = "ABCMeta";
 static char __pyx_k_GF_plus[] = "GF.plus";
-static char __pyx_k_doctest[] = "doctest";
 static char __pyx_k_prepare[] = "__prepare__";
 static char __pyx_k_product[] = "product";
-static char __pyx_k_testmod[] = "testmod";
 static char __pyx_k_unshift[] = "unshift";
-static char __pyx_k_verbose[] = "verbose";
 static char __pyx_k_GF2_plus[] = "GF2.plus";
 static char __pyx_k_GF4_plus[] = "GF4.plus";
 static char __pyx_k_GF_minus[] = "GF.minus";
@@ -956,9 +944,9 @@ static char __pyx_k_Poly_to_string_line_206[] = "Poly.to_string (line 206)";
 static char __pyx_k_GF4_init_static_variables[] = "GF4.init_static_variables";
 static char __pyx_k_GF_2_2_0_1_x_x_1_0_0_1_1_2_x_3[] = "\n    GF(2^2) = {0,1,x,x+1}\n    0->0, 1->1, 2->x, 3->x+1\n    ";
 static char __pyx_k_Users_keru_project_git_genecode[] = "/Users/keru/project-git/genecoder/genecoder/lab/poly_gf4.pyx";
-static char __pyx_k_a_x_b_x_over_the_field_from_lab[] = " a(x) + b(x) over the field\n\n        >>> from lab.poly_gf4 import *\n        >>> a_x =   [1,0,1,1] #       x^3 + x + 1\n        >>> b_x = [1,1,0,1,1] # x^4 + x^3 + x + 1\n        >>> Poly.plus(a_x, b_x, field=GF4)\n        [1, 0, 0, 0, 0]\n\n        ";
-static char __pyx_k_a_x_mod_b_x_over_the_field_from[] = " a(x) mod b(x) over the field.\n\n        >>> from lab.poly_gf4 import *\n        >>> a = [3,0,0] # a^2x^2\n        >>> b = [1,0,1] # x^2 + 1\n        >>> Poly.mod(a,b,field=GF4)\n        [3]\n\n        ";
-static char __pyx_k_return_the_usual_representation[] = " return the usual representation.\n\n        >>> from lab.poly_gf4 import *\n        >>> p = [1,0,1]\n        >>> Poly.to_string(p)\n        '1x^2+0x^1+1'\n\n        >>> p = [1,2,3]\n        >>> Poly.to_string(p)\n        '1x^2+ax^1+a^2'\n\n        ";
+static char __pyx_k_a_x_b_x_over_the_field_from_gen[] = " a(x) + b(x) over the field\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> a_x =   [1,0,1,1] #       x^3 + x + 1\n        >>> b_x = [1,1,0,1,1] # x^4 + x^3 + x + 1\n        >>> Poly.plus(a_x, b_x, field=GF4)\n        [1, 0, 0, 0, 0]\n\n        ";
+static char __pyx_k_a_x_mod_b_x_over_the_field_from[] = " a(x) mod b(x) over the field.\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> a = [3,0,0] # a^2x^2\n        >>> b = [1,0,1] # x^2 + 1\n        >>> Poly.mod(a,b,field=GF4)\n        [3]\n\n        ";
+static char __pyx_k_return_the_usual_representation[] = " return the usual representation.\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> p = [1,0,1]\n        >>> str(Poly.to_string(p))\n        '1x^2+0x^1+1'\n\n        >>> p = [1,2,3]\n        >>> str(Poly.to_string(p))\n        '1x^2+ax^1+a^2'\n\n        ";
 static PyObject *__pyx_kp_u_0;
 static PyObject *__pyx_kp_u_0_x_1;
 static PyObject *__pyx_kp_u_1;
@@ -1002,7 +990,7 @@ static PyObject *__pyx_n_s_a;
 static PyObject *__pyx_n_u_a;
 static PyObject *__pyx_kp_u_a_2;
 static PyObject *__pyx_n_s_a_x;
-static PyObject *__pyx_kp_u_a_x_b_x_over_the_field_from_lab;
+static PyObject *__pyx_kp_u_a_x_b_x_over_the_field_from_gen;
 static PyObject *__pyx_kp_u_a_x_mod_b_x_over_the_field_from;
 static PyObject *__pyx_n_s_abc;
 static PyObject *__pyx_n_s_abstractmethod;
@@ -1014,7 +1002,6 @@ static PyObject *__pyx_n_s_d_max;
 static PyObject *__pyx_n_s_divide;
 static PyObject *__pyx_n_s_divide_table;
 static PyObject *__pyx_n_s_doc;
-static PyObject *__pyx_n_s_doctest;
 static PyObject *__pyx_n_s_f;
 static PyObject *__pyx_n_s_f1;
 static PyObject *__pyx_n_s_f2;
@@ -1032,7 +1019,6 @@ static PyObject *__pyx_n_s_items;
 static PyObject *__pyx_n_s_itertools;
 static PyObject *__pyx_n_s_m;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_u_main;
 static PyObject *__pyx_n_s_map;
 static PyObject *__pyx_n_s_mb_x;
 static PyObject *__pyx_n_s_metaclass;
@@ -1041,7 +1027,6 @@ static PyObject *__pyx_n_s_minus_table;
 static PyObject *__pyx_n_s_mod;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_n;
-static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_new_list;
 static PyObject *__pyx_n_s_object;
 static PyObject *__pyx_n_s_plus;
@@ -1061,12 +1046,9 @@ static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_t;
 static PyObject *__pyx_n_s_terms;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_n_s_test_2;
-static PyObject *__pyx_n_s_testmod;
 static PyObject *__pyx_n_s_to_string;
 static PyObject *__pyx_n_s_to_string_table;
 static PyObject *__pyx_n_s_unshift;
-static PyObject *__pyx_n_s_verbose;
 static PyObject *__pyx_n_s_zip;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -1107,7 +1089,6 @@ static PyObject *__pyx_tuple__52;
 static PyObject *__pyx_tuple__54;
 static PyObject *__pyx_tuple__56;
 static PyObject *__pyx_tuple__58;
-static PyObject *__pyx_tuple__60;
 static PyObject *__pyx_codeobj__7;
 static PyObject *__pyx_codeobj__9;
 static PyObject *__pyx_codeobj__11;
@@ -1132,7 +1113,6 @@ static PyObject *__pyx_codeobj__53;
 static PyObject *__pyx_codeobj__55;
 static PyObject *__pyx_codeobj__57;
 static PyObject *__pyx_codeobj__59;
-static PyObject *__pyx_codeobj__61;
 
 /* "genecoder/lab/poly_gf4.pyx":68
  * 
@@ -3967,7 +3947,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_16__defaults__(CYTHON_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_9to_string(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_8to_string[] = " return the usual representation.\n\n        >>> from lab.poly_gf4 import *\n        >>> p = [1,0,1]\n        >>> Poly.to_string(p)\n        '1x^2+0x^1+1'\n\n        >>> p = [1,2,3]\n        >>> Poly.to_string(p)\n        '1x^2+ax^1+a^2'\n\n        ";
+static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_8to_string[] = " return the usual representation.\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> p = [1,0,1]\n        >>> str(Poly.to_string(p))\n        '1x^2+0x^1+1'\n\n        >>> p = [1,2,3]\n        >>> str(Poly.to_string(p))\n        '1x^2+ax^1+a^2'\n\n        ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_8poly_gf4_4Poly_9to_string = {"to_string", (PyCFunction)__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_9to_string, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_8to_string};
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_9to_string(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_a_x = 0;
@@ -4370,7 +4350,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_18__defaults__(CYTHON_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_11mod(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_10mod[] = " a(x) mod b(x) over the field.\n\n        >>> from lab.poly_gf4 import *\n        >>> a = [3,0,0] # a^2x^2\n        >>> b = [1,0,1] # x^2 + 1\n        >>> Poly.mod(a,b,field=GF4)\n        [3]\n\n        ";
+static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_10mod[] = " a(x) mod b(x) over the field.\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> a = [3,0,0] # a^2x^2\n        >>> b = [1,0,1] # x^2 + 1\n        >>> Poly.mod(a,b,field=GF4)\n        [3]\n\n        ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_8poly_gf4_4Poly_11mod = {"mod", (PyCFunction)__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_11mod, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_10mod};
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_11mod(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_a_x = 0;
@@ -4893,7 +4873,7 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_20__defaults__(CYTHON_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_13plus(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_12plus[] = " a(x) + b(x) over the field\n\n        >>> from lab.poly_gf4 import *\n        >>> a_x =   [1,0,1,1] #       x^3 + x + 1\n        >>> b_x = [1,1,0,1,1] # x^4 + x^3 + x + 1\n        >>> Poly.plus(a_x, b_x, field=GF4)\n        [1, 0, 0, 0, 0]\n\n        ";
+static char __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_12plus[] = " a(x) + b(x) over the field\n\n        >>> from genecoder.lab.poly_gf4 import *\n        >>> a_x =   [1,0,1,1] #       x^3 + x + 1\n        >>> b_x = [1,1,0,1,1] # x^4 + x^3 + x + 1\n        >>> Poly.plus(a_x, b_x, field=GF4)\n        [1, 0, 0, 0, 0]\n\n        ";
 static PyMethodDef __pyx_mdef_9genecoder_3lab_8poly_gf4_4Poly_13plus = {"plus", (PyCFunction)__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_13plus, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9genecoder_3lab_8poly_gf4_4Poly_12plus};
 static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_4Poly_13plus(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_a_x = 0;
@@ -5145,7 +5125,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_12plus(CYTHON_UNUSED P
  *             b = b_x[-1 - i] if i < len(b_x) else 0
  *             new_list.insert(0, field.plus(a, b))             # <<<<<<<<<<<<<<
  *         return new_list
- * 
  */
     __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_plus); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
@@ -5193,8 +5172,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_12plus(CYTHON_UNUSED P
  *             b = b_x[-1 - i] if i < len(b_x) else 0
  *             new_list.insert(0, field.plus(a, b))
  *         return new_list             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_new_list);
@@ -5223,97 +5200,6 @@ static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4_4Poly_12plus(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_v_i);
   __Pyx_XDECREF(__pyx_v_a);
   __Pyx_XDECREF(__pyx_v_b);
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_TraceReturn(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "genecoder/lab/poly_gf4.pyx":474
- * 
- * 
- * def _test():             # <<<<<<<<<<<<<<
- *     import doctest
- *     doctest.testmod(verbose=False)
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_1_test(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_9genecoder_3lab_8poly_gf4_1_test = {"_test", (PyCFunction)__pyx_pw_9genecoder_3lab_8poly_gf4_1_test, METH_NOARGS, 0};
-static PyObject *__pyx_pw_9genecoder_3lab_8poly_gf4_1_test(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("_test (wrapper)", 0);
-  __pyx_r = __pyx_pf_9genecoder_3lab_8poly_gf4__test(__pyx_self);
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9genecoder_3lab_8poly_gf4__test(CYTHON_UNUSED PyObject *__pyx_self) {
-  PyObject *__pyx_v_doctest = NULL;
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_TraceDeclarations
-  __Pyx_RefNannySetupContext("_test", 0);
-  __Pyx_TraceCall("_test", __pyx_f[0], 474);
-
-  /* "genecoder/lab/poly_gf4.pyx":475
- * 
- * def _test():
- *     import doctest             # <<<<<<<<<<<<<<
- *     doctest.testmod(verbose=False)
- * 
- */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_doctest, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_doctest = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "genecoder/lab/poly_gf4.pyx":476
- * def _test():
- *     import doctest
- *     doctest.testmod(verbose=False)             # <<<<<<<<<<<<<<
- * 
- * if __name__ == '__main__':
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_doctest, __pyx_n_s_testmod); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_verbose, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "genecoder/lab/poly_gf4.pyx":474
- * 
- * 
- * def _test():             # <<<<<<<<<<<<<<
- *     import doctest
- *     doctest.testmod(verbose=False)
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("genecoder.lab.poly_gf4._test", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_doctest);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_TraceReturn(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -5386,7 +5272,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_u_a, __pyx_k_a, sizeof(__pyx_k_a), 0, 1, 0, 1},
   {&__pyx_kp_u_a_2, __pyx_k_a_2, sizeof(__pyx_k_a_2), 0, 1, 0, 0},
   {&__pyx_n_s_a_x, __pyx_k_a_x, sizeof(__pyx_k_a_x), 0, 0, 1, 1},
-  {&__pyx_kp_u_a_x_b_x_over_the_field_from_lab, __pyx_k_a_x_b_x_over_the_field_from_lab, sizeof(__pyx_k_a_x_b_x_over_the_field_from_lab), 0, 1, 0, 0},
+  {&__pyx_kp_u_a_x_b_x_over_the_field_from_gen, __pyx_k_a_x_b_x_over_the_field_from_gen, sizeof(__pyx_k_a_x_b_x_over_the_field_from_gen), 0, 1, 0, 0},
   {&__pyx_kp_u_a_x_mod_b_x_over_the_field_from, __pyx_k_a_x_mod_b_x_over_the_field_from, sizeof(__pyx_k_a_x_mod_b_x_over_the_field_from), 0, 1, 0, 0},
   {&__pyx_n_s_abc, __pyx_k_abc, sizeof(__pyx_k_abc), 0, 0, 1, 1},
   {&__pyx_n_s_abstractmethod, __pyx_k_abstractmethod, sizeof(__pyx_k_abstractmethod), 0, 0, 1, 1},
@@ -5398,7 +5284,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_divide, __pyx_k_divide, sizeof(__pyx_k_divide), 0, 0, 1, 1},
   {&__pyx_n_s_divide_table, __pyx_k_divide_table, sizeof(__pyx_k_divide_table), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
-  {&__pyx_n_s_doctest, __pyx_k_doctest, sizeof(__pyx_k_doctest), 0, 0, 1, 1},
   {&__pyx_n_s_f, __pyx_k_f, sizeof(__pyx_k_f), 0, 0, 1, 1},
   {&__pyx_n_s_f1, __pyx_k_f1, sizeof(__pyx_k_f1), 0, 0, 1, 1},
   {&__pyx_n_s_f2, __pyx_k_f2, sizeof(__pyx_k_f2), 0, 0, 1, 1},
@@ -5416,7 +5301,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_itertools, __pyx_k_itertools, sizeof(__pyx_k_itertools), 0, 0, 1, 1},
   {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_u_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 1, 0, 1},
   {&__pyx_n_s_map, __pyx_k_map, sizeof(__pyx_k_map), 0, 0, 1, 1},
   {&__pyx_n_s_mb_x, __pyx_k_mb_x, sizeof(__pyx_k_mb_x), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
@@ -5425,7 +5309,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_mod, __pyx_k_mod, sizeof(__pyx_k_mod), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
-  {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_new_list, __pyx_k_new_list, sizeof(__pyx_k_new_list), 0, 0, 1, 1},
   {&__pyx_n_s_object, __pyx_k_object, sizeof(__pyx_k_object), 0, 0, 1, 1},
   {&__pyx_n_s_plus, __pyx_k_plus, sizeof(__pyx_k_plus), 0, 0, 1, 1},
@@ -5445,12 +5328,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_t, __pyx_k_t, sizeof(__pyx_k_t), 0, 0, 1, 1},
   {&__pyx_n_s_terms, __pyx_k_terms, sizeof(__pyx_k_terms), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_n_s_test_2, __pyx_k_test_2, sizeof(__pyx_k_test_2), 0, 0, 1, 1},
-  {&__pyx_n_s_testmod, __pyx_k_testmod, sizeof(__pyx_k_testmod), 0, 0, 1, 1},
   {&__pyx_n_s_to_string, __pyx_k_to_string, sizeof(__pyx_k_to_string), 0, 0, 1, 1},
   {&__pyx_n_s_to_string_table, __pyx_k_to_string_table, sizeof(__pyx_k_to_string_table), 0, 0, 1, 1},
   {&__pyx_n_s_unshift, __pyx_k_unshift, sizeof(__pyx_k_unshift), 0, 0, 1, 1},
-  {&__pyx_n_s_verbose, __pyx_k_verbose, sizeof(__pyx_k_verbose), 0, 0, 1, 1},
   {&__pyx_n_s_zip, __pyx_k_zip, sizeof(__pyx_k_zip), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -5849,18 +5729,6 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
   __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(3, 0, 8, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_plus, 258, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 258; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-
-  /* "genecoder/lab/poly_gf4.pyx":474
- * 
- * 
- * def _test():             # <<<<<<<<<<<<<<
- *     import doctest
- *     doctest.testmod(verbose=False)
- */
-  __pyx_tuple__60 = PyTuple_Pack(1, __pyx_n_s_doctest); if (unlikely(!__pyx_tuple__60)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__60);
-  __Pyx_GIVEREF(__pyx_tuple__60);
-  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_keru_project_git_genecode, __pyx_n_s_test, 474, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5901,7 +5769,6 @@ PyMODINIT_FUNC PyInit_poly_gf4(void)
   PyObject *__pyx_t_11 = NULL;
   PyObject *__pyx_t_12 = NULL;
   Py_ssize_t __pyx_t_13;
-  int __pyx_t_14;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -7241,60 +7108,6 @@ PyMODINIT_FUNC PyInit_poly_gf4(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "genecoder/lab/poly_gf4.pyx":474
- * 
- * 
- * def _test():             # <<<<<<<<<<<<<<
- *     import doctest
- *     doctest.testmod(verbose=False)
- */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_9genecoder_3lab_8poly_gf4_1_test, NULL, __pyx_n_s_genecoder_lab_poly_gf4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-
-  /* "genecoder/lab/poly_gf4.pyx":478
- *     doctest.testmod(verbose=False)
- * 
- * if __name__ == '__main__':             # <<<<<<<<<<<<<<
- *     _test()
- */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_name); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_14 = (__Pyx_PyUnicode_Equals(__pyx_t_5, __pyx_n_u_main, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__pyx_t_14) {
-
-    /* "genecoder/lab/poly_gf4.pyx":479
- * 
- * if __name__ == '__main__':
- *     _test()             # <<<<<<<<<<<<<<
- */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_test); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 479; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_7 = NULL;
-    if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_7)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_7);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-      }
-    }
-    if (__pyx_t_7) {
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 479; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    } else {
-      __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 479; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    }
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    goto __pyx_L10;
-  }
-  __pyx_L10:;
-
   /* "genecoder/lab/poly_gf4.pyx":1
  * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
  * # cython: profile=True
@@ -7304,8 +7117,8 @@ PyMODINIT_FUNC PyInit_poly_gf4(void)
   __Pyx_GOTREF(__pyx_t_5);
   if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_Poly_to_string_line_206, __pyx_kp_u_return_the_usual_representation) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_Poly_mod_line_229, __pyx_kp_u_a_x_mod_b_x_over_the_field_from) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_Poly_plus_line_258, __pyx_kp_u_a_x_b_x_over_the_field_from_lab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_kp_u_Poly_plus_line_258, __pyx_kp_u_a_x_b_x_over_the_field_from_gen) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /*--- Wrapped vars code ---*/
@@ -8716,126 +8529,6 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
     }
     Py_XDECREF(owned_metaclass);
     return result;
-}
-
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-    if (s1 == s2) {
-        return (equals == Py_EQ);
-    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
-        const char *ps1, *ps2;
-        Py_ssize_t length = PyBytes_GET_SIZE(s1);
-        if (length != PyBytes_GET_SIZE(s2))
-            return (equals == Py_NE);
-        ps1 = PyBytes_AS_STRING(s1);
-        ps2 = PyBytes_AS_STRING(s2);
-        if (ps1[0] != ps2[0]) {
-            return (equals == Py_NE);
-        } else if (length == 1) {
-            return (equals == Py_EQ);
-        } else {
-            int result = memcmp(ps1, ps2, (size_t)length);
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
-        return (equals == Py_NE);
-    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
-        return (equals == Py_NE);
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
-    }
-#endif
-}
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-#if PY_MAJOR_VERSION < 3
-    PyObject* owned_ref = NULL;
-#endif
-    int s1_is_unicode, s2_is_unicode;
-    if (s1 == s2) {
-        goto return_eq;
-    }
-    s1_is_unicode = PyUnicode_CheckExact(s1);
-    s2_is_unicode = PyUnicode_CheckExact(s2);
-#if PY_MAJOR_VERSION < 3
-    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
-        owned_ref = PyUnicode_FromObject(s2);
-        if (unlikely(!owned_ref))
-            return -1;
-        s2 = owned_ref;
-        s2_is_unicode = 1;
-    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
-        owned_ref = PyUnicode_FromObject(s1);
-        if (unlikely(!owned_ref))
-            return -1;
-        s1 = owned_ref;
-        s1_is_unicode = 1;
-    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
-        return __Pyx_PyBytes_Equals(s1, s2, equals);
-    }
-#endif
-    if (s1_is_unicode & s2_is_unicode) {
-        Py_ssize_t length;
-        int kind;
-        void *data1, *data2;
-        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
-            return -1;
-        length = __Pyx_PyUnicode_GET_LENGTH(s1);
-        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
-            goto return_ne;
-        }
-        kind = __Pyx_PyUnicode_KIND(s1);
-        if (kind != __Pyx_PyUnicode_KIND(s2)) {
-            goto return_ne;
-        }
-        data1 = __Pyx_PyUnicode_DATA(s1);
-        data2 = __Pyx_PyUnicode_DATA(s2);
-        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
-            goto return_ne;
-        } else if (length == 1) {
-            goto return_eq;
-        } else {
-            int result = memcmp(data1, data2, (size_t)(length * kind));
-            #if PY_MAJOR_VERSION < 3
-            Py_XDECREF(owned_ref);
-            #endif
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & s2_is_unicode) {
-        goto return_ne;
-    } else if ((s2 == Py_None) & s1_is_unicode) {
-        goto return_ne;
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
-    }
-return_eq:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_EQ);
-return_ne:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_NE);
-#endif
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {

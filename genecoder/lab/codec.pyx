@@ -37,7 +37,7 @@ class Coder_BCH(Coder):
                 a_x is a data polynomial to encode with the degree k
         example:
                 (n=7,k=4) BCH code over GF(4)
-                >>> from lab.codec import *
+                >>> from genecoder.lab.codec import *
                 >>> g_x = [1,0,1,1] # x^3 + x + 1
                 >>> dat = [1,1,0,1]
                 >>> coder = Coder_BCH(g_x, n=7)
@@ -57,7 +57,8 @@ class Coder_BCH(Coder):
                 a_x is a data polynomial to encode with the degree k
         example:
                 (n=7,k=4) BCH code over GF(4)
-                >>> from lab.codec import *
+                >>> from genecoder.lab.codec import *
+                >>> from genecoder.lab.poly_gf4 import GF2
                 >>> g_x = [1,0,1,1] # x^3 + x + 1
                 >>> dat = [1,1,0,1,1,1,0,1]
                 >>> coder = Coder_BCH(g_x, n=7, field=GF2)
@@ -84,7 +85,7 @@ class Coder_Convolution(Coder):
             ref. [2] p.250
     example:
             2/3 convolutional code over GF(4)
-            >>> from lab.codec import *
+            >>> from genecoder.lab.codec import *
             >>> G13 = [1,0,1] # D^2 + 1
             >>> G23 = [1,1] # D + 1
             >>> G = [[1,],[0,],[0,],[1,],G13,G23]
@@ -138,7 +139,7 @@ class Coder_Linear(Coder):
     algorithm:
     example:
             (3,2)-linear code over GF(4)
-            >>> from lab.codec import *
+            >>> from genecoder.lab.codec import *
             >>> G = [1,0,0,1,1,1]
             >>> coder = Coder_Linear(G=G, n=3, k=2, field=GF4)
             >>> coder.encode([0,1,2,3,0,1,2,3,0,1])
@@ -185,11 +186,3 @@ coder_Iwadare = Coder_Convolution(
 # G23 = D+1
 coder_SelfOrthogonal = Coder_Convolution(
     G=[[1, ], [0, ], [0, ], [1, ], [1, 0, 1], [1, 1]], n=3, k=2, field=GF4)
-
-
-def _test():
-    import doctest
-    doctest.testmod(verbose=False)
-
-if __name__ == '__main__':
-    _test()

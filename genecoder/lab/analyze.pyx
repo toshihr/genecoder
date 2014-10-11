@@ -52,17 +52,17 @@ def gen_table(csv_reader, columns=None, accept_filters=None, omit_filters={}):
 
     example:
     >>> import csv
-    >>> from lab import analyze
+    >>> from genecoder.lab import analyze
     >>> fromDB = 'id,c1,c2,c3\\n001,1,2,3\\n002,2,3,4'
     >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n'))))
     [['001', '1', '2', '3'], ['002', '2', '3', '4']]
     >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n')), columns=['id','c1']))
     [['001', '1'], ['002', '2']]
-    >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n')), columns=['id','c1'], accept_filters=
-{'c2':'3'}))
+    >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n')),
+    ... columns=['id','c1'], accept_filters={'c2':'3'}))
     [['002', '2']]
-    >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n')), columns=['id','c1'], omit_filters=
-{'c2':'3'}))
+    >>> list(analyze.gen_table(csv.reader(fromDB.split('\\n')),
+    ... columns=['id','c1'], omit_filters={'c2':'3'}))
     [['001', '1']]
 
     '''
@@ -99,7 +99,7 @@ def gen_columns_from_table(table, column_indexes,
     omit_filters: {index:value}
     example:
     >>> import csv
-    >>> from lab import analyze
+    >>> from genecoder.lab import analyze
     >>> fromDB = [['001', '1', '2', '3'], ['002', '2', '3', '4']]
     >>> list(analyze.gen_columns_from_table(fromDB, [0,1]))
     [['001', '1'], ['002', '2']]
@@ -138,12 +138,12 @@ def survivalTest(data, km=True):
     破壊的関数
     example:
     >>> import numpy as np
-    >>> from lab import analyze
+    >>> from genecoder.lab import analyze
     >>> g = [0,0,1,1,0,0,1,1,0,1,1,0,0,0,1,1,1,0,0,1,0,1,0,1,0,1,1,0,0,0]
     >>> e = [1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,1,0,1,0,0,1,0,1,0,0,0]
     >>> t = [2,20,5,1,3,17,2,3,15,14,12,13,11,11,10,8,8,3,7,3,6,2,5,4,2,3,1,3,2,1]
     >>> stat_wilcox,stat_logrank,stat_km_g1,stat_km_g2 = analyze.survivalTest(np.array([g,e,t],
-dtype=float))
+    ... dtype=float))
     >>> print(stat_km_g1[3]) # 累積確率
     [ 1.          0.93333333  0.86666667  0.86666667  0.86666667  0.86666667
       0.86666667  0.86666667  0.86666667  0.74285714  0.74285714  0.74285714
@@ -211,15 +211,20 @@ def gen_survivalTest_with_thretholds(value, event, time, thretholds):
      value,event,time: numpy.array
     output: yield (threshold, n1, n2, results)
     example:
+    >>> try:
+    ...     from future_builtins import map, zip
+    ... except ImportError:
+    ...     pass
+    ...
     >>> import numpy as np
-    >>> from lab import analyze
+    >>> from genecoder.lab import analyze
     >>> e = np.array([1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1,0,0,1,1,0,1,0,0,1,0,1,0,0,0])
     >>> t = np.array([2,20,5,1,3,17,2,3,15,14,12,13,11,11,10,8,8,3,7,3,6,2,5,4,2,3,1,3,2,1])
-    >>> v = np.array([x/len(e)/2 for x in range(len(e))])
+    >>> v = np.array([float(x)/len(e)/2 for x in range(len(e))])
     >>> for threshold,n1,n2,a_result in analyze.gen_survivalTest_with_thretholds(v,e,t,list(map(
-lambda x: x/100, range(5,100,5)))):
-    ... 	print('[{0}]threshold={1},n1={2},n2={3}'.format('OK' if a_result else 'NOT CALCULATED',
-threshold,n1,n2))
+    ... lambda x: float(x)/100, range(5,100,5)))):
+    ...     print('[{0}]threshold={1},n1={2},n2={3}'.format('OK' if a_result else 'NOT CALCULATED',
+    ... threshold,n1,n2))
     ...
     [OK]threshold=0.05,n1=27,n2=3
     [OK]threshold=0.1,n1=24,n2=6
@@ -735,11 +740,11 @@ def gen_RC_distance(seqs, coder, GF4_coordinate='ATGC'):
     input:
     output: (name, original sequence(length fixed), encoded sequence, AA1, AA2, RC, similarity)
     example:
-    >>> import lab.analyze
-    >>> from lab.codec import Coder_BCH
+    >>> import genecoder.lab.analyze
+    >>> from genecoder.lab.codec import Coder_BCH
     >>> seqs = [('name','atgcatgcatgc')]
     >>> coder = Coder_BCH(g_x=[1,1],n=3)
-    >>> for a_result in lab.analyze.gen_RC_distance(seqs,coder,'ATGC'):
+    >>> for a_result in genecoder.lab.analyze.gen_RC_distance(seqs,coder,'ATGC'):
     ... 	print(a_result)
     ...
     ('name', 'atgcatgcatgc', 'ATTCACGCTTGC', 'MHAC', 'IHAC', '0.75', '0.0')
@@ -766,8 +771,3 @@ def gen_RC_distance(seqs, coder, GF4_coordinate='ATGC'):
         # output
         yield (name1, s1, s2, bio.NA2AA(s1), bio.NA2AA(s2), fracToStr(bio.RC(s1, s2)),
                fracToStr(bio.get_similarity(s1, s2)))
-
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod(verbose=False)

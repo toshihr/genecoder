@@ -24,6 +24,9 @@ def poly2str(poly, base='x'):
             if poly[i] > 0:
                 s.append('{0}'.format(poly[i]))
 
+    if len(s) == 0:
+        s.append('0')
+
     return ' + '.join(s)
 
 
@@ -95,7 +98,7 @@ class Coder_Cyclic(Coder):
         return res
 
     def __str__(self):
-        return 'g(x) = {0}'.format(poly2str(self.g_x))
+        return 'n = {0}, k = {1}, g(x) = {2}'.format(self.n, self.k, poly2str(self.g_x))
 
 
 class Coder_Convolution(Coder):
@@ -153,7 +156,8 @@ class Coder_Convolution(Coder):
         return W
 
     def __str__(self):
-        return 'G = [{0}]'.format(','.join(map(lambda p: poly2str(p, 'D'), self.G)))
+        return 'n = {0}, k = {1}, G = [{2}]'.format(
+            self.n, self.k, ','.join(map(lambda p: poly2str(p, 'D'), self.G)))
 
 
 class Coder_Linear(Coder):

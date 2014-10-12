@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
 
-'''genecoder
+'''code analysis for genes
 
 usage:
     genecoder distance [--quiet-verbose | --quiet] [--fraction]
-                       (--coder=<coder> ... | --all) (--gf4=<gf4> ... | --gf4all)
-                       [--output=<output>] (--seq=<label_na> ... | --input=<fasta>)
+                       (--coder=<coder> ... | --all)
+                       (--gf4=<gf4> ... | --gf4all)
+                       [--output=<output>]
+                       (--seq=<label_na> ... | --input=<fasta>)
     genecoder stat     [-quiet | -Quiet] [--fraction]
-                       (--coder=<coder> | --all) (--gf4=<gf4> | --gf4all)
+                       (--coder=<coder> | --all)
+                       (--gf4=<gf4> | --gf4all)
                        [--graph] (--outdir=<outdir>) (--input=<dataset>)
     genecoder gui      [--fraction]
-                       [--coder=<coder> ... | --all] [--gf4=<gf4> ... | --gf4all]
+                       [--coder=<coder> ... | --all]
+                       [--gf4=<gf4> ... | --gf4all]
                        [--graph] [--output=<output> | --outdir=<outdir>]
                        [--input=<fasta> | --input=<dataset>]
     genecoder list
-    genecoder csv2fasta <idx_name> <idx_seq> [<length>] [--input=<csv>] [--output=<output>]
+    genecoder csv2fasta <idx_name> <idx_seq> [<length>] [--input=<csv>]
+                        [--output=<output>]
     genecoder -h | --help
     genecoder -v | --version
 
@@ -30,14 +35,19 @@ options:
     -c=<coder>, --coder=<coder>     add coder
     -a, --all                       add all supported codes
     -g, --graph                     draw graph
-    --gf4=<gf4>                     set the correspondings with the elements of GF(4)
+    --gf4=<gf4>                     element correspondings, e.g. ATGC, ACGT
     --gf4all                        use all combinations of correspondings
-    --seq=<label_na>                add 'label:nucleotide sequence' style sequence
+    --seq=<label_na>                add 'label:nucleotide sequence'
     -i=<fasta>, --input=<fasta>     add sequences from the FASTA file
     -o=<output>, --output=<output>  result CSV file
     --outdir=<outdir>               result directory
     -h, --help                      show this help
     -v, --version                   show version
+
+references:
+- Sato Keiko, Toshihide Hara, and Masanori Ohya. "The code structure of the p53
+  DNA-binding domain and the prognosis of breast cancer patients." Bioinformati
+  cs 29.22 (2013): 2822-2825.
 
 '''
 

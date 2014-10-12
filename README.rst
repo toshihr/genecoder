@@ -56,14 +56,14 @@ Calculate RC distance:
 
 ::
 
-    $ genecoder distance --coder bch_n3_1 --coder bch_n3_2 -gf4 ATGC --seq label1:ATGCATGCATGC --output [result]
+    $ genecoder distance --coder n3_1 --coder n3_2 -gf4 ATGC --seq label1:ATGCATGCATGC --output [result]
     $ genecoder --all --gf4all --input [FASTA]
 
 Survival analysis:
 
 ::
 
-    $ genecoder stat --graph --coder bch_n3_1 --outdir [result_dir] --input [tp53 database file]
+    $ genecoder stat --graph --coder n3_1 --outdir [result_dir] --input [tp53 database file]
 
 
 The results are stored in ``result_dir`` folder.

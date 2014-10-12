@@ -36,7 +36,7 @@ class TestStatMode:
 
     def test_data(self):
         # run
-        cmd = 'stat --coder bch_n3_1 --gf4 atgc --outdir {0} --input {1}'.format(outdir, absname)
+        cmd = 'stat --coder n3_1 --gf4 atgc --outdir {0} --input {1}'.format(outdir, absname)
         assert main(shlex.split(cmd)) == 0
 
         with open(outfile, 'rU') as fin:

@@ -19,5 +19,5 @@ class TestDistance:
         pass
 
     def test_simple1(self):
-        cmd = 'distance --coder bch_n3_1 --gf4 atgc --seq seq1:TTTCTTATTGTT'
+        cmd = 'distance --coder n3_1 --gf4 atgc --seq seq1:TTTCTTATTGTT'
         assert main(shlex.split(cmd)) == 0

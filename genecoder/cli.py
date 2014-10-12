@@ -51,7 +51,7 @@ from docopt import docopt
 import sys
 import re
 import itertools
-from genecoder.resource import NAME, VERSION, CODERS
+from genecoder.resource import CODERS
 from genecoder.lab.fasta import Fasta
 
 
@@ -128,7 +128,7 @@ def validate_args(args):
 
 def main(argv=sys.argv[1:]):
     # parse argv. no options, with -v, -h will execute sys.exit()
-    args = docopt(__doc__, argv=argv, version='{0} {1}'.format(NAME, VERSION), options_first=False)
+    args = docopt(__doc__, argv=argv, options_first=False)
 
     if __name__ == '__main__':
         print(args)

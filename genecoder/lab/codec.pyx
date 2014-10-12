@@ -4,6 +4,29 @@ import abc
 from genecoder.lab.poly_gf4 import GF4, Poly
 
 
+def poly2str(poly, base='x'):
+    l = len(poly) - 1
+    s = []
+    for i in range(len(poly)):
+        if poly[i] > 1:
+            coeff = '{0}'.format(poly[i])
+        elif poly[i] == 1:
+            coeff = ''
+        else:
+            continue
+
+        if l - i > 1:
+            s.append('{0}{1}^{2}'.format(coeff, base, l - i))
+        elif l - i == 1:
+            s.append('{0}{1}'.format(coeff, base))
+        else:
+            # const
+            if poly[i] > 0:
+                s.append('{0}'.format(poly[i]))
+
+    return ' + '.join(s)
+
+
 class Coder(object, metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
@@ -13,9 +36,9 @@ class Coder(object, metaclass=abc.ABCMeta):
 #    def decode(self, a_x): pass
 
 
-class Coder_BCH(Coder):
+class Coder_Cyclic(Coder):
 
-    ''' BCH code (cyclic code) over the field.
+    ''' Cyclic code (including BCH code, Reed-Solomon code) over the field.
     parameter:
             g_x: a generator polynomial with the degree n-k (should be a primitive polynomial)
             n: a length of code
@@ -32,15 +55,15 @@ class Coder_BCH(Coder):
         self.k = n - (len(g_x) - 1)
 
     def encode_1block(self, a_x):
-        ''' BCH code (cyclic code) over the field.
+        ''' Cyclic code over the field.
         input:
                 a_x is a data polynomial to encode with the degree k
         example:
-                (n=7,k=4) BCH code over GF(4)
+                (n=7,k=4) Cyclic code over GF(4)
                 >>> from genecoder.lab.codec import *
                 >>> g_x = [1,0,1,1] # x^3 + x + 1
                 >>> dat = [1,1,0,1]
-                >>> coder = Coder_BCH(g_x, n=7)
+                >>> coder = Coder_Cyclic(g_x, n=7)
                 >>> coder.encode_1block(dat)
                 [1, 1, 0, 1, 0, 0, 1]
 
@@ -52,16 +75,16 @@ class Coder_BCH(Coder):
         return Poly.plus(b_x, r_x)
 
     def encode(self, a_x):
-        ''' BCH code (cyclic code) over the field.
+        '''Cyclic code over the field.
         input:
                 a_x is a data polynomial to encode with the degree k
         example:
-                (n=7,k=4) BCH code over GF(4)
+                (n=7,k=4) Cyclic code over GF(4)
                 >>> from genecoder.lab.codec import *
                 >>> from genecoder.lab.poly_gf4 import GF2
                 >>> g_x = [1,0,1,1] # x^3 + x + 1
                 >>> dat = [1,1,0,1,1,1,0,1]
-                >>> coder = Coder_BCH(g_x, n=7, field=GF2)
+                >>> coder = Coder_Cyclic(g_x, n=7, field=GF2)
                 >>> coder.encode(dat)
                 [1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1]
 
@@ -70,6 +93,9 @@ class Coder_BCH(Coder):
         for i in range(0, len(a_x), self.k):
             res.extend(self.encode_1block(a_x[i:i + self.k]))
         return res
+
+    def __str__(self):
+        return 'g(x) = {0}'.format(poly2str(self.g_x))
 
 
 class Coder_Convolution(Coder):
@@ -126,6 +152,9 @@ class Coder_Convolution(Coder):
 
         return W
 
+    def __str__(self):
+        return 'G = [{0}]'.format(','.join(map(lambda p: poly2str(p, 'D'), self.G)))
+
 
 class Coder_Linear(Coder):
 
@@ -172,6 +201,8 @@ class Coder_Linear(Coder):
 
         return W
 
+    def __str__(self):
+        return 'G = [{0}]'.format(','.join(self.G))
 
 # === famous code ===
 # Iwadare code (n=3, field=GF(4))

@@ -7,11 +7,12 @@ except ImportError:
     # Python 2
     from ConfigParser import ConfigParser
 import os
+from collections import OrderedDict
 # the followings are necessary for parsing genecoder.ini
-from genecoder.lab.codec import Coder_BCH, Coder_Convolution, coder_Iwadare, coder_SelfOrthogonal
+from genecoder.lab.codec import Coder_Cyclic, Coder_Convolution, coder_Iwadare, coder_SelfOrthogonal
 from genecoder.lab.poly_gf4 import GF4
 try:
-    Coder_BCH
+    Coder_Cyclic
     Coder_Convolution
     coder_Iwadare
     coder_SelfOrthogonal
@@ -21,12 +22,10 @@ except:
 
 # === config ===
 INI_FILE = os.path.join(os.path.dirname(__file__), 'genecoder.ini')
-NAME = 'genecoder'
-VERSION = '1.0.0'
 
 # === global variables ===
 # CODERS = { coder_name: coder_object }
-CODERS = {}
+CODERS = OrderedDict
 
 
 def load_coders():
@@ -48,7 +47,7 @@ def load_coders():
     a_coder_name_list = config.options(section_name)
 
     global CODERS
-    CODERS = {}
+    CODERS = OrderedDict()
     for a_coder_name in a_coder_name_list:
         CODERS[a_coder_name] = eval(config.get(section_name, a_coder_name))
 

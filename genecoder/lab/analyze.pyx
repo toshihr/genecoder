@@ -741,9 +741,9 @@ def gen_RC_distance(seqs, coder, GF4_coordinate='ATGC'):
     output: (name, original sequence(length fixed), encoded sequence, AA1, AA2, RC, similarity)
     example:
     >>> import genecoder.lab.analyze
-    >>> from genecoder.lab.codec import Coder_BCH
+    >>> from genecoder.lab.codec import Coder_Cyclic
     >>> seqs = [('name','atgcatgcatgc')]
-    >>> coder = Coder_BCH(g_x=[1,1],n=3)
+    >>> coder = Coder_Cyclic(g_x=[1,1],n=3)
     >>> for a_result in genecoder.lab.analyze.gen_RC_distance(seqs,coder,'ATGC'):
     ... 	print(a_result)
     ...

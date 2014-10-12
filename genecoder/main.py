@@ -54,9 +54,16 @@ def mode_stat(args):
 
 def mode_list(args):
     from genecoder.resource import CODERS
-    print('--- support coders defined in genecoder.ini ---')
-    print(list(CODERS.keys()))
+    for name, (desc, n, k, obj) in CODERS.items():
+        print('{0}: {1}, {2}'.format(name.lower(), desc, str(obj)))
     print()
+    print('NOTE: coefficient <-> an element of GF(4)')
+    print('                0 <-> 0')
+    print('                1 <-> 1')
+    print('                2 <-> alpha (primitive element)')
+    print('                3 <-> alpha^2')
+    print('')
+
     return 0
 
 

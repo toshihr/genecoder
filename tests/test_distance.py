@@ -2,7 +2,7 @@ from genecoder.main import main
 import shlex
 
 
-class TestAdd:
+class TestDistance:
 
     @classmethod
     def setup_class(clazz):

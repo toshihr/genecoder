@@ -75,6 +75,24 @@ def mode_gui(args):
         return 0
 
 
+def mode_csv2fasta(args):
+    from genecoder.csv2fasta import csv2fasta
+
+    if args['--input'] is None:
+        fin = sys.stdin
+    else:
+        fin = open(args['--input'], 'rU')
+
+    if args['--output'] is None:
+        fout = sys.stdout
+    else:
+        fout = open(args['--output'], 'w')
+
+    csv2fasta(fin, fout, args['<idx_name>'], args['<idx_seq>'], args['<length>'], to_upper=True)
+
+    return 0
+
+
 def main(argv=sys.argv[1:]):
 
     args = cli.main(argv)
@@ -91,7 +109,8 @@ def main(argv=sys.argv[1:]):
         return mode_distance(args)
     elif args['gui']:
         return mode_gui(args)
-
+    elif args['csv2fasta']:
+        return mode_csv2fasta(args)
     return 0
 
 

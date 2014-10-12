@@ -14,6 +14,7 @@ usage:
                        [--graph] [--output=<output> | --outdir=<outdir>]
                        [--input=<fasta> | --input=<dataset>]
     genecoder list
+    genecoder csv2fasta <idx_name> <idx_seq> [<length>] [--input=<csv>] [--output=<output>]
     genecoder -h | --help
     genecoder -v | --version
 
@@ -98,6 +99,11 @@ def tune_args(args):
             input_sequences.extend(list(fasta.blocks))
         # add new entry
         args['input sequences'] = input_sequences
+
+    # csv2fasta mode
+    args['<idx_name>'] = int(args['<idx_name>']) if args['<idx_name>'] else None
+    args['<idx_seq>'] = int(args['<idx_seq>']) if args['<idx_seq>'] else None
+    args['<length>'] = int(args['<length>']) if args['<length>'] else None
 
     return args
 

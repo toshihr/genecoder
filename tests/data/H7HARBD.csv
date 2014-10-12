@@ -1,0 +1,9 @@
+name,(H1 numbering),131-135codon,nucleotide,185-191,nucleotide,190-198,nucleotide,218-225,nucleotide
+AAC40998 Influenza A virus (A/England/268/1996(H7N7)),,GATSA,ggagcaaccagtgca,TAEQTKL,actgcagagcagaccaagtta,KLYGSGNKL,aagttatatgggagtggaaacaaacta,PQVNGQSG,ccacaagtgaatggccaatctgga
+AAR02638 Influenza A virus (A/Netherlands/33/03(H7N7)),,GATSA,ggagcaaccagtgca,TTEQTKL,actacagaacagaccaagcta,KLYGSGNKL,aagctatatgggagtggaaacaaactg,PQVNGQSG,ccacaagtgaatggccaatctgga
+AAR02640 Influenza A virus (A/Netherlands/219/2003(H7N7)),,GTTSA,ggaacaaccagtgca,TTEQTKL,actacagaacagaccaagcta,KLYGSGNKL,aagctatatgggagtggaaacaaactg,PQVNGQSG,ccacaagtgaatggccaatctgga
+ACC55270 Influenza A virus (A/New York/107/2003(H7N2)),,GATSA,ggagcgacaagtgcc,VSEQTKL,gttagcgagcagaccaaactc,KLYGSGNKL,aaactctatggaagtggaaacaagttg,--------,
+ABI85000 Influenza A virus (A/Canada/rv504/2004(H7N3)),,GATSA,ggggcgacgagtgcc,ATEQTKL,gctactgagcagaccaaactc,KLYGSGNKL,aaactctatggaagtggaaacaagttg,PQVNGQSG,ccacaagtgaatggacaatcagga
+AFQ55689 Influenza A virus (A/Mexico/InDRE7218/2012(H7N3)),,GATSA,ggggcgacaagtgct,ATEQTKL,gctactgagcagaccaaactc,KLYGSGNKL,aaactctatgggagtggaaacaagttg,PQVNGQSG,ccacaggtgaatgggcaatcagga
+AGI60301 Influenza A virus (A/Hangzhou/1/2013(H7N9)),,GATSA,ggagcaaccagtgca,TAEQTKL,actgcagagcaaaccaagcta,KLYGSGNKL,aagctatatgggagtggaaacaaactg,PQVNGISG,ccacaagttaatggtatatctgga
+AGJ51953 Influenza A virus (A/Zhejiang/DTID-ZJU01/2013(H7N9)),,GATSA,ggagcaaccagtgca,TAEQTKL,actgcagagcaaaccaagcta,KLYGSGNKL,aagctatatgggagtggaaacaaactg,PQVNGLSG,ccacaagttaatggtctatctgga

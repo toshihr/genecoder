@@ -24,7 +24,7 @@ import os.path
 import glob
 from itertools import chain
 
-version = '1.0.2'
+version = '1.0.3'
 
 
 class PyTest(TestCommand):

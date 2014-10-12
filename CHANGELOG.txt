@@ -1,5 +1,9 @@
 Changes
 =======
+1.0.1
+-----
+fix list mode
+
 1.0.0
 -----
 first version

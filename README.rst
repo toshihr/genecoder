@@ -1,5 +1,7 @@
+==========================================================
 genecoder: Code analyzer for the coding region of a gene.
-=========
+==========================================================
+
 .. image:: https://travis-ci.org/kerug/genecoder.svg
     :target: https://travis-ci.org/kerug/genecoder
 
@@ -43,7 +45,7 @@ The genecoder can be installed via pip_.
 
 ::
 
-    $ pip install git+https://github.com/kerug/genecoder.git
+    $ pip install genecoder
     $ pyside_postinstall.py -install
 
 Usage examples
@@ -162,7 +164,7 @@ Sometimes, the following commands are needed:
     $ pyenv rehash
 
 
-Qt creator's user-interface (*.ui) can be converted to python code as follows:
+Qt creator's user-interface (\*.ui) can be converted to python code as follows:
 
 ::
 
@@ -177,4 +179,3 @@ References
 - http://theory.cs.uvic.ca/gen/poly.html
 
 .. _Link: http://www.ncbi.nlm.nih.gov/pubmed/23986567
-

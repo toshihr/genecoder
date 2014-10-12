@@ -52,7 +52,7 @@ def mode_stat(args):
     return 0
 
 
-def mode_list():
+def mode_list(args):
     from genecoder.resource import CODERS
     print('--- support coders defined in genecoder.ini ---')
     print(list(CODERS.keys()))

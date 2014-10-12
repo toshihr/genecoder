@@ -105,7 +105,7 @@ def main(argv=sys.argv[1:]):
     args = cli.main(argv)
 
     analyze.fracStyle = args['--fraction']
-    analyze.verboseWarning = args['--quiet-verbose'] or args['--quiet']
+    analyze.verboseWarning = (args['--quiet-verbose'] is False) and (args['--quiet'] is False)
     analyze.quietErr = args['--quiet']
 
     if args['list']:

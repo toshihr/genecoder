@@ -1,4 +1,4 @@
-genecoder: Code analyzer for the coding region of a gene. [WIP]
+genecoder: Code analyzer for the coding region of a gene.
 =========
 .. image:: https://travis-ci.org/kerug/genecoder.svg
     :target: https://travis-ci.org/kerug/genecoder
@@ -46,49 +46,50 @@ The genecoder can be installed via pip_.
     $ pip install git+https://github.com/kerug/genecoder.git
     $ pyside_postinstall.py -install
 
-How to use
-==========
+Usage examples
+==============
 
-Standard mode:
+Calculate RC distance:
 
-::
-
-    $ genecoder -code bch_n3_1 -code bch_n3_2 -gf4 ATGC -seq name1 ATGCATGCATGC -output [result]
-    $ genecoder -all -gf4all [FASTA]
-
-Statistical analysis mode:
 
 ::
 
-    $ genecoder -stat -code bch_n3_1 -o [result_dir] [tp53 database file]
+    $ genecoder distance --coder bch_n3_1 --coder bch_n3_2 -gf4 ATGC --seq label1:ATGCATGCATGC --output [result]
+    $ genecoder --all --gf4all --input [FASTA]
 
-or
+Survival analysis:
 
 ::
 
-    $ genecoder -stat_with_graph -code bch_n3_1 -o [result_dir] [tp53 database file]
+    $ genecoder stat --graph --coder bch_n3_1 --outdir [result_dir] --input [tp53 database file]
 
 
 The results are stored in ``result_dir`` folder.
 
 
-Gui mode:
+Generate FASTA file from csv database:
 
 ::
 
-    $ genecoder -gui
+    $ genecoder csv2fasta <idx_name> <idx_seq> [<length>] [--input=<csv>] [--output=<output>]
 
-Help:
+Use GUI:
+
+::
+
+    $ genecoder gui
+
+Show help:
 
 ::
 
     $ genecoder -h
 
-List coders:
+Show support coders:
 
 ::
 
-    $ genecoder -showcoders
+    $ genecoder list
 
 
 TP53 database file format

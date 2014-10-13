@@ -1,5 +1,13 @@
 Changes
 =======
+1.0.4
+-----
+change results-header of distance mode
+
+1.0.3
+-----
+fix csv2fasta mode
+
 1.0.2
 -----
 update support coders

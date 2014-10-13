@@ -11,7 +11,7 @@ def mode_distance(args):
     header = (
         'name',
         'NA',
-        'enocoded_NA',
+        'encoded_NA',
         'AA',
         'encoded_AA',
         'RC',

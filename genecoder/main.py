@@ -10,15 +10,15 @@ from genecoder import cli
 def mode_distance(args):
     header = (
         'name',
-        'dna sequence',
-        'enocoded dna sequence',
-        'protein',
-        'encoded protein',
+        'NA',
+        'enocoded_NA',
+        'AA',
+        'encoded_AA',
         'RC',
-        'similarity between original dna sequence and encoded dna sequence',
-        'coordinate of GF(4) elements',
-        'coder_id',
-        'coder_detail'
+        'similarity_NA',
+        'GF4',
+        'coder',
+        'coder_desc'
     )
 
     if args['--output'] is None:

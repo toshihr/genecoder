@@ -20,11 +20,12 @@ except ImportError:
     from setuptools import setup
     EXIST_CX_FREEZE = False
 from setuptools.command.test import test as TestCommand
+from genecoder.version import VERSION
 import os.path
 import glob
 from itertools import chain
 
-version = '1.0.5'
+version = VERSION
 
 
 class PyTest(TestCommand):

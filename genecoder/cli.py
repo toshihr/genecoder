@@ -63,6 +63,7 @@ import re
 import itertools
 from genecoder.resource import CODERS
 from genecoder.lab.fasta import Fasta
+from genecoder.version import VERSION
 
 
 def tune_args(args):
@@ -138,7 +139,7 @@ def validate_args(args):
 
 def main(argv=sys.argv[1:]):
     # parse argv. no options, with -v, -h will execute sys.exit()
-    args = docopt(__doc__, argv=argv, options_first=False)
+    args = docopt(__doc__, argv=argv, version='genecoder {0}'.format(VERSION), options_first=False)
 
     if __name__ == '__main__':
         print(args)

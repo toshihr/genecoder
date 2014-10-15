@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
+# cython: profile=True
 from __future__ import absolute_import, division, print_function, unicode_literals
 import abc
 from genecoder.lab.poly_gf4 import GF4, Poly
 
 
 def poly2str(poly, base='x'):
+    cdef int l
+    cdef int i
+
     l = len(poly) - 1
     s = []
     for i in range(len(poly)):
@@ -93,6 +97,7 @@ class Coder_Cyclic(Coder):
 
         '''
         res = []
+        cdef int i
         for i in range(0, len(a_x), self.k):
             res.extend(self.encode_1block(a_x[i:i + self.k]))
         return res

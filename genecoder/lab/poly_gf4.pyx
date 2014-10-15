@@ -236,6 +236,9 @@ class Poly:
         [3]
 
         '''
+
+        cdef int i, t
+
         assert field == GF2 or field == GF4
         assert b_x[0] > 0
         a_x = a_x[:]

@@ -17,3 +17,5 @@ dist
 .tox
 
 tests/_tmpdir
+
+Profile.prof

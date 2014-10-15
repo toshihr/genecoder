@@ -6,6 +6,9 @@ import os
 import shutil
 import csv
 
+import pytest
+pytest.main(__file__)
+
 filename = 'L2L3seqs_event_T3T4.csv'
 absname = os.path.join(os.path.dirname(__file__), 'data', filename)
 outdir = os.path.join(os.path.dirname(__file__), '_tmpdir')

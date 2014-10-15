@@ -1,6 +1,9 @@
 from genecoder.main import main
 import shlex
 
+import pytest
+pytest.main(__file__)
+
 
 class TestDistance:
 

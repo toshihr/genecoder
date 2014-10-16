@@ -40,7 +40,7 @@ options:
     --gf4all                        use all combinations of correspondings
     --seq=<label_na>                add 'label:nucleotide sequence'
     -i=<fasta>, --input=<fasta>     add sequences from the FASTA file
-    -o=<output>, --output=<output>  result CSV file
+    -o=<output>, --output=<output>  result CSV file (.csv or .csv.gz)
     --outdir=<outdir>               result directory
     -h, --help                      show this help
     -v, --version                   show version

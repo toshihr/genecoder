@@ -26,9 +26,9 @@ def mode_distance(args):
         fout = sys.stdout
     else:
         if args['--output'][-7:] == '.csv.gz' or args['--compress']:
-            fout = gzip.open(args['--output'], 'w')
+            fout = gzip.open(args['--output'], 'wt')
         elif args['--output'][-4:] == '.csv':
-            fout = open(args['--output'], 'w')
+            fout = open(args['--output'], 'wt')
         else:
             raise ValueError('unknown output format')
     csv_writer = csv.writer(fout)

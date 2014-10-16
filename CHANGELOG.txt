@@ -1,5 +1,9 @@
 Changes
 =======
+1.1.1
+-----
+add auto ext recognition
+
 1.1.0
 -----
 add --compress option

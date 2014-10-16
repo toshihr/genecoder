@@ -3,7 +3,7 @@
 '''code analysis for genes
 
 usage:
-    genecoder distance [--quiet-verbose | --quiet] [--fraction]
+    genecoder distance [--quiet-verbose | --quiet] [--fraction] [--compress ]
                        (--coder=<coder> ... | --all)
                        (--gf4=<gf4> ... | --gf4all)
                        [--output=<output>]
@@ -35,6 +35,7 @@ options:
     -c=<coder>, --coder=<coder>     add coder
     -a, --all                       add all supported codes
     -g, --graph                     draw graph
+    --compress                      output zipped csv, works with --output
     --gf4=<gf4>                     element correspondings, e.g. ATGC, ACGT
     --gf4all                        use all combinations of correspondings
     --seq=<label_na>                add 'label:nucleotide sequence'

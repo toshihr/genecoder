@@ -1,5 +1,9 @@
 Changes
 =======
+1.1.0
+-----
+add --compress option
+
 1.0.5
 -----
 change results-header of distance mode

@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 import sys
 import csv
+import gzip
 from genecoder.resource import CODERS
 from genecoder.lab import analyze
 from genecoder import cli
@@ -24,7 +25,10 @@ def mode_distance(args):
     if args['--output'] is None:
         fout = sys.stdout
     else:
-        fout = open(args['--output'], 'w')
+        if args['--compress']:
+            fout = gzip.open(args['--output'] + '.gz', 'w')
+        else:
+            fout = open(args['--output'], 'w')
     csv_writer = csv.writer(fout)
 
     csv_writer.writerow(header)

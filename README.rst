@@ -9,6 +9,7 @@ genecoder: Code analyzer for the coding region of a gene.
 Requirements
 ============
 
+- Python 2.7 or 3.4
 - Qt4
 
 Qt4 (Mac OS X)
@@ -47,6 +48,13 @@ The genecoder can be installed via pip_.
 
     $ pip install genecoder
     $ pyside_postinstall.py -install
+
+If you meet some PySide error, try the following:
+
+::
+
+    $ pip install --find-links=https://kerug.github.io/python-wheelhouse --use-wheel --no-index --pre PySide
+
 
 Usage examples
 ==============
@@ -113,17 +121,18 @@ Columns should be the followings:
 How to develop
 ==============
 
-Developers should use pyenv_ and `pyenv-virtualenv`_.
+We recommend pyenv_ and `pyenv-virtualenv`_ enviroments.
 
 .. _pyenv: https://github.com/yyuu/pyenv
 .. _pyenv-virtualenv: https://github.com/yyuu/pyenv-virtualenv
 
-Mac OS X users can be installed via Homebrew:
+These programs are easily installed by using `pyenv-installer`_:
+
+.. _pyenv-installer: https://github.com/yyuu/pyenv-installer
 
 ::
 
-    $ brew install pyenv-virtualenv
-
+    $ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 How to construct an environment:
 
@@ -132,11 +141,15 @@ How to construct an environment:
     $ git clone https://github.com/kerug/genecoder.git
     $ cd genecoder
 
-    $ pyenv install 2.7.5
-    $ pyenv install 3.4.1
-    $ pyenv virtualenv 2.7.5 genecoder-2.7.5
-    $ pyenv virtualenv 3.4.1 genecoder-3.4.1
-    $ pyenv local genecoder-2.7.5 genecoder-3.4.1
+    $ pyenv install 2.7.8
+    $ pyenv install 3.4.2
+    $ pyenv virtualenv 2.7.8 genecoder-2.7.8
+    $ pyenv virtualenv 3.4.2 genecoder-3.4.2
+    $ pyenv local genecoder-2.7.8 genecoder-3.4.2
+
+    $ pip install --find-links=https://kerug.github.io/python-wheelhouse --use-wheel --no-index --pre PySide
+    $ pip3 install --find-links=https://kerug.github.io/python-wheelhouse --use-wheel --no-index --pre PySide
+    $ pyside_postinstall.py -install
 
     $ pip install -r test-requirements.txt
     $ pip3 install -r test-requirements.txt
@@ -148,6 +161,7 @@ Tests for Python 2 & 3:
 
     $ tox
 
+Now, the tox test is broken because the PySide 1.2 cannot be installed via pip.
 
 Alternatively,
 

@@ -36,15 +36,14 @@ def mode_distance(args):
     csv_writer.writerow(header)
 
     for a_coordinate_of_GF4 in args['--gf4']:
-        for coder_id, (desc, n, k, obj) in map(lambda _id:
-                                                           (_id, CODERS[_id]), args['--coder']):
+        for coder_id, (desc, n, k, obj) in map(lambda _id: (_id, CODERS[_id]), args['--coder']):
             for (a_name, s1, s2, AA1, AA2, RC, simirarity) in analyze.gen_RC_distance(
                     seqs=args['input sequences'],
                     coder=obj,
                     GF4_coordinate=a_coordinate_of_GF4):
                 a_line = [
                     a_name, s1, s2, AA1, AA2, RC, simirarity, a_coordinate_of_GF4,
-                    coder_id, desc]
+                    coder_id, '{0}, {1}'.format(desc, str(obj))]
                 csv_writer.writerow(a_line)
 
     if fout != sys.stdout:
